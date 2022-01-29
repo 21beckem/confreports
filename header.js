@@ -43,7 +43,7 @@ function createHeader(option) {
                 cursor:pointer;
                 border-radius:20px 7px;
                 border:1px solid black;
-            " onclick="window.location.href = '/confreports/graph/'">
+            " onclick="window.location.href = '/graph/'">
             <i class="fa fa-line-chart" style="font-size:40px;vertical-align:middle;"></i>
             <a style="margin-left:10px;font-size:20px;">Visualize Trends</a>
         </div>`;
@@ -73,7 +73,7 @@ function createHeader(option) {
                     padding-left:50px;
                     margin-bottom: 5px;
                 ">
-            <a onclick="window.location.href = '/confreports/'" style="cursor:pointer;font-size: 40px;text-decoration: none;font-family: 'Sansita Swashed', cursive;">
+            <a onclick="window.location.href = '/'" style="cursor:pointer;font-size: 40px;text-decoration: none;font-family: 'Sansita Swashed', cursive;">
                 <i style="
                     border-radius: 10px;
                     padding-top: 1px;
