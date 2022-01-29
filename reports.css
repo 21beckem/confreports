@@ -1,0 +1,109 @@
+body {
+    font-family: arial;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: rgb(0, 0, 145);
+    background-image: radial-gradient( rgb(0, 108, 175), rgb(0, 0, 145));
+    /* background-image: radial-gradient( rgb(255, 255, 255), rgb(193, 193, 193)); */
+    right: 20px;
+    padding: 30px;
+}
+.container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    max-width: 200px;
+    margin-left: 20px;
+}
+.container img {
+    width: 100%;
+    height: auto;
+}
+.container .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+.container .btn:hover {
+    background-color: black;
+}
+
+.hidden {
+    display: none;
+}
+
+#wordReport {
+    font-size: 24px;
+    font-family: 'Trebuchet MS',sans-serif;
+    width: 70%;
+    background-color: rgb(240,240,240);
+    /* background-color: rgb(255, 255, 255); */
+    box-shadow: 1px 3px 5px rgba(34,34,34,0.6);
+    padding-top: 30px;
+    margin: -40px;
+    padding-bottom: 30px;
+}
+
+tr:nth-child(even) {
+      background-color: rgb(207, 207, 207);
+}
+td {
+    padding: 10px;
+}
+.button {
+    border-radius: 4px;
+    background-color: rgb(0,0,205);
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 7px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    box-shadow: 1px 2px 2px rgba(34,34,34,0.6);
+}
+/*@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap');*/
+
+.topHeader:hover {
+    background-color: #dedede;
+}
+
+/* vietnamese */
+@font-face {
+    font-family: 'Sansita Swashed';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/sansitaswashed/v5/BXR8vFfZifTZgFlDDLgNkBydPKTt3pVCeYWqJnZSW2puXTIfeymE.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+    font-family: 'Sansita Swashed';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/sansitaswashed/v5/BXR8vFfZifTZgFlDDLgNkBydPKTt3pVCeYWqJnZSW2puXTMfeymE.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+    font-family: 'Sansita Swashed';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/sansitaswashed/v5/BXR8vFfZifTZgFlDDLgNkBydPKTt3pVCeYWqJnZSW2puXT0few.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

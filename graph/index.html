@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/leoScrollbar.css">
+    <title>Graph Trends Through Conferences</title>
+    <script src="../head.js"></script>
+    <style>
+        input[type=text] {
+            width: 20%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 2px solid gray;
+            border-radius: 4px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input { 
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        #myheader {
+            magin-bottom:0px;
+        }
+        #taboptions {
+            height: 50px;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            width: 100%;
+        }
+        .tabtitle {
+            transition: 0.2s;
+            outline: none;
+            border: none;
+            width: 50%;
+            font-weight:normal;
+            cursor: pointer;
+            box-shadow: 2px 3px 3px 0px rgb(146 146 146);
+            background-color: rgb(206 206 206);
+            color: rgb(121 121 121);
+        }
+        .activeTab {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+<body onload="updateNumber();">
+<script src="../header.js"></script><script>write("");</script>
+<br><br>
+<center>
+<div id="wordReport">
+<h2 id="myheader">Graph Trends Through Conferences</h2>
+<!-- <p style="font-size:17px;">What would you like to search?</p> -->
+<table id="taboptions">
+    <th id="wordsTab" class="tabtitle activeTab" onclick="setSearchType('wordsTab');">
+        <a>Words</a>
+    </th>
+    <th id="phrasesTab" class="tabtitle" onclick="setSearchType('phrasesTab');">
+        <a>Phrases</a>
+    </th>
+    <script>
+function setSearchType(type) {
+    document.getElementById('wordsTab').classList.remove("activeTab");
+    document.getElementById('phrasesTab').classList.remove("activeTab");
+    document.getElementById(type).classList.add("activeTab");
+    document.getElementById('wordsTabContent').style.display = "none";
+    document.getElementById('phrasesTabContent').style.display = "none";
+    document.getElementById(type + 'Content').style.display = "block";
+    document.getElementById(type + 'Input').focus();
+}
+    </script>
+</table>
+<div id="wordsTabContent">
+<form method="GET" action="output.php" autocomplete="off">
+    <input type="hidden" name="searchType" value="word" />
+    <p>How many conferences back?</p>
+    <input class="confSlider" type="range" min="2" max="20" value="20" name="sliderNum" oninput="updateNumber(this, 'sliderNum')" style="width:30%; background:rgb(47,67,87)" /><br>
+    <a class="sliderNum" style="font-size:20px;position:relative;top:-10px;"></a>
+    <p>What <strong>word</strong> do you want to search?</p>
+    <input id="wordsTabInput" oninput="checkNumberOfWords(this);" type="text" name="word" style="position:relative;top:-10px;" autofocus />
+    <br>
+    <table style="width:100%">
+        <th style="width:49%; font-weight:normal;">
+            <!--<p>Wildcard at the beginning?</p>
+            No
+            <label class="switch">
+                <input name="wildcardBeginning" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            Yes-->
+        </th>
+        <th style="width:49%; font-weight:normal;">
+            <p>Wildcard at the end?</p>
+            No
+            <label class="switch">
+                <input name="wildcardEnd" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            Yes
+        </th>
+    </table>
+    <br>
+    <br>
+</form>
+    <button class="button" onclick="isThereText(document.forms[0], 'wordsTabInput')">Make Me A Graph! :)</button>
+</div>
+
+<div id="phrasesTabContent" style="display:none">
+<form method="GET" action="output.php" autocomplete="off">
+    <input type="hidden" name="searchType" value="phrase" />
+    <p>How many conferences back?</p>
+    <input class="confSlider" type="range" min="2" max="20" value="20" name="sliderNum" oninput="updateNumber(this, 'sliderNum')" style="width:30%; background:rgb(47,67,87)" /><br>
+    <a class="sliderNum" style="font-size:20px;position:relative;top:-10px;"></a>
+    <p>What <strong>phrase</strong> do you want to search?</p>
+    <input id="phrasesTabInput" type="text" name="word" style="position:relative;top:-10px;" />
+    <br>
+    <br>
+</form>
+    <button class="button" onclick="isThereText(document.forms[1], 'phrasesTabInput')">Make Me A Graph! :)</button>
+</div>
+
+<script>
+function isThereText(theForm, elToCheck) {
+    if (document.getElementById(elToCheck).value != "") {
+        theForm.submit();
+    }
+}
+function updateNumber(thisEl, thisId) {
+    document.getElementsByClassName('sliderNum')[0].innerHTML = document.getElementsByClassName('confSlider')[0].value;
+    document.getElementsByClassName('sliderNum')[1].innerHTML = document.getElementsByClassName('confSlider')[1].value;
+}
+function checkNumberOfWords(el) {
+    words = el.value.split(/\s+/);
+    //console.log(words);
+    el.value = words[0];
+}
+</script>
+</div>
+<center>
+</body>
+</html>

@@ -1,0 +1,4 @@
+document.write(`
+    </div>
+    <center>
+`);

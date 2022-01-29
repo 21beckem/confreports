@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <style>
+            body {
+              font-family: arial;
+              background-repeat: no-repeat;
+              background-attachment: fixed;
+              background-color: rgb(0, 0, 145);
+              background-image: radial-gradient( rgb(0, 108, 175), rgb(0, 0, 145));
+              right: 20px;
+              padding: 30px;
+            }
+            #loginForm {
+              background-color: rgb(189, 189, 189);
+              width: 85%;
+              padding-top: 20px;
+              padding-left: 60px;
+              padding-right: 40px;
+              padding-bottom: 40px;
+              margin: auto;
+              box-shadow: 1px 3px 5px rgba(34,34,34,0.6);
+              text-align: left;
+
+            }
+            /*width */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: #ffffff1e;
+                box-shadow: 2px 2px 2px rgba(34,34,34,0.6);
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: rgba(70, 70, 70, 0.85);
+                border-radius: 5px;
+                transition: background 1s ease;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: rgb(54, 54, 54);
+                box-shadow: 5px rgba(34,34,34,0.8);
+            }
+            .confTile {
+              position: relative;
+              margin: 10px;
+              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+              width: 300px;
+              height: 250px;
+              background-size: cover;
+            }
+            .confTitle {
+              position: absolute;
+              left: 0;
+              bottom: 0;
+              width: calc(100% - 20px);
+              color: white;
+              background-color: black;
+              padding: 10px;
+            }
+            #confContainer {
+              display: flex;
+              flex-wrap: wrap;
+              width: 100%;
+            }
+        </style>
+        <title>General Conference Reports</title>
+    </head>
+    <body>
+        <a href="/"><img src="../images/logo.png" width="200px"></a>
+          <br><br>
+          <div id="loginForm">
+            <center><h2>Conference Reports by Katrina Olson</h2><p>Click on a Conference to view the report</p></center>
+            <div id="confContainer">
+              <a href="oct2020/"><div class="confTile" style="background-image:linear-gradient(to bottom, rgba(245, 246, 252, 0.1), rgba(0, 0, 0, 0.7)),url('img/ElderNelson.jpg');">
+                <div class="confTitle">October 2020</div>
+              </div></a>
+            </div>
+          </div>
+    </body>
+</html>

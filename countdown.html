@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>countdown to stake conference</title>
+	<style>
+	    p {
+		font-size: 90px;
+	    }
+	</style>
+    </head>
+    <body>
+        <p id="timerText"></p>
+        <script>
+const targetTime = new Date("Sat Mar 13 2021 16:00:00 GMT-0600 (Central Standard Time)");
+var t=setInterval(setTimer,1000);
+
+var timerText = document.getElementById("timerText");
+function setTimer() {
+    var diff = Math.abs(targetTime - new Date());
+    var res = Math.abs(targetTime - new Date()) / 1000;
+    var minutes = Math.floor(res/60);
+    var seconds = Math.round(res % 60);
+    console.log(minutes + ":" + seconds);
+    minutes = ('0'+minutes).slice(-2);
+    seconds = ('0'+seconds).slice(-2);
+    timerText.innerHTML = minutes + ":" + seconds;
+}
+setTimer();
+        </script>
+    </body>
+</html>
