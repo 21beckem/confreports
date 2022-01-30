@@ -1,33 +1,25 @@
 <html>
     <head>
+<script src="collectedConferences.js"></script>
     <script>
-
-
-//  april is #.0, oct is #.5
-//                    oldest, newest
-var confFolders = ['2012april', '2021oct'];
-
-
-
-function toFolderName(thisI) { return Number.isInteger(thisI) ? thisI + 'april' : Math.floor(thisI) + 'oct'; }
 async function pasteTiles(pasteContainerId) {
-    await generateTiles();
+    generateTiles();
     document.getElementById(pasteContainerId).innerHTML = confTiles.join('');
 }
-confFolders[0] = parseFloat(confFolders[0].replace('april', '.0').replace('oct', '.5'));
-confFolders[1] = parseFloat(confFolders[1].replace('april', '.0').replace('oct', '.5'));
-console.log(confFolders);
+function indexToConfName(thisI) {
+    var name = (Number.isInteger(thisI) ? 'April ' : 'October ');
+    thisI = parseFloat(thisI.replace('april', '').replace('oct', ''));
+    name += Math.floor(thisI);
+    return name;
+}
 var confTiles = Array();
-async function generateTiles() {
-    let counter = confFolders[0];
-    while (counter < confFolders[1]) {
-        let fname = toFolderName(counter);
-        let titleReponse = await fetch(fname + '/name.txt');
-        let confName = await titleReponse.text();
-        confTiles.push('<a href="' + fname + '"><div class="confTile" style="background-image:linear-gradient(to bottom, rgba(255, 255, 255, .1), rgba(0, 0, 154, 0.5)),url(\'' + fname + '/thumbnail.png\');"><div class="confTitle">' + confName + '</div></div></a>');
-        counter += 0.5;
+var allConfs = new confList();
+function generateTiles() {
+    var list = allConfs.getList();
+    console.log(list);
+    for (let i = 0; i < list.length; i++) {
+        confTiles.push('<a href="' + list[i] + '"><div class="confTile" style="background-image:linear-gradient(to bottom, rgba(255, 255, 255, .1), rgba(0, 0, 154, 0.5)),url(\'' + list[i] + '/thumbnail.png\');"><div class="confTitle">' + indexToConfName(list[i]) + '</div></div></a>');
     }
-    confTiles.reverse();
 }
     </script>
         <style>

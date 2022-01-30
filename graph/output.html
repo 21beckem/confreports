@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="/collectedConferences.js"></script>
+    <script src="/conference.js"></script>
+    <script>
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+if (urlParams.has('searchType') && urlParams.has('word') && urlParams.has('sliderNum')) {} else {
+    window.location.href = '/graph/';
+}
+
+const searchOneWord = urlParams.get('searchType') == 'word' || urlParams.get('word').split(" ").includes(" ");
+const sliderNum = urlParams.get('sliderNum');
+if (searchOneWord) {
+    var word = urlParams.get('word').split(" ")[0].toLowerCase();
+} else {
+    var word = urlParams.get('word').toLowerCase();
+}
+const originalWord = word;
+
+const usingWilds = searchOneWord && urlParams.has('wildcardEnd');
+if (usingWilds) {
+    word = word + '((?:[a-zA-Z]+)?)';
+}
+
+//get conferences list
+var allConfs = new confList();
+var dirs = allConfs.getList().reverse();
+
+console.log("finding words...");
+numToSearch = Math.min(sliderNum, dirs.length);
+var dataPoints = Array();
+var confPoints = Array();
+var foundWords = Array();
+var pageLoaded = false;
+var dataCounted = false;
+
+function countOccurrences(arr, val) {
+    return arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+}    
+function countWords(str, substring) {
+    str = str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    str = str.replace(/\s{2,}/g," ");
+    str = str.replace(/(^\s*)|(\s*$)/gi,"");
+    str = str.replace(/[ ]{2,}/gi," ");
+    str = str.replace(/\n /,"\n");
+    return countOccurrences(str.split(' '), substring);
+}
+
+async function searchForWords() {
+    if (searchOneWord) {
+        for (let i = 0; i < numToSearch; i++) {
+            var thisTotal = 0;
+            let response = await fetch('/' + dirs[i] + '/index.html');
+            let responseTxt = await response.text();
+            //console.log(dirs[i]);
+            //console.log(responseTxt);
+            let regex = new RegExp('>' + word + '<\/td><td>([\\d]+)', 'g');
+            let matchText = responseTxt.match(regex);
+            if (matchText != null) {
+                var total = 0;
+                let matches = matchText[0].split('</td><td>');
+                if (usingWilds) {
+                    let matches = Array();
+                    for (let ii = 0; ii < matchText.length; ii++) {
+                        let txt = matchText[ii].split('</td><td>')[0];
+                        if (!foundWords.includes(txt.substring(1))) {
+                            foundWords.push(txt.substring(1));
+                        }
+                        console.log(matchText[ii]);
+                        total += parseInt(matchText[ii].split('</td><td>')[1]);
+                    }
+                } else {
+                    total = matches[1];
+                }
+                //console.log(matches);
+                dataPoints.push(parseInt(total));
+            } else {
+                dataPoints.push(0);
+            }
+            confPoints.push(dirs[i]);
+        }
+    } else {
+        for (let i = 0; i < numToSearch; i++) {
+            let rawDataResponse = await fetch('/' + dirs[i] + '/data.json');
+            let rawData = await rawDataResponse.text();
+            let wholeTxt = ConfTools.getWholeText(JSON.parse(rawData));
+            console.log(wholeTxt);
+            dataPoints.push(parseInt(countWords(wholeTxt, word)));
+            confPoints.push(dirs[i]);
+        }
+    }
+    dataCounted = true;
+    if (pageLoaded) {
+        showEverything();
+    }
+}
+
+
+searchForWords().then();
+
+    </script>
+    <meta charset="utf-8" />
+    <style>
+    html, body {
+        height: 100%;
+    }
+    #confsGraph {
+        height: calc(100% - 56px);
+    }
+    .sidenav {
+        width: 170px;
+        position: fixed;
+        z-index: 1;
+        top: 150px;
+        left: 10px;
+        background: #eee;
+        overflow-x: hidden;
+        padding: 8px 0;
+    }
+
+    .sidenav span {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 22px;
+        color: #2196F3;
+        display: block;
+    }
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .sidenav a:hover {
+        color: #064579;
+    }
+
+    .main {
+        margin-left: 140px; /* Same width as the sidebar + left position in px */
+        font-size: 28px; /* Increased text to enable scrolling */
+        padding: 0px 10px;
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+    </style>
+    <title>Found Words</title>
+    <script src="/loadingcss.js"></script>
+    <script src="../head.js"></script>
+</head>
+<body style="overflow:hidden;">
+<script src="../header.js"></script><script>write("graph");</script>
+<script src="../alert.js"></script><script>writeAlert("New Feature!", "Hold [Shift] and click on a point on the graph to take you to that conference!");</script>
+<div id="foundWords" class="sidenav" style="display:none"></div>
+<center>
+<div id="wordReport" style="position:relative;top:-70px; height:100%">
+<div id="confsGraph" style="width:90%;"><br><br><br><br><div id="loading"><script src="/loadinghtml.js"></script></div></div>
+<script src="plotly-latest.min.js"></script>
+<script>
+var bigBoyHeader = document.getElementById("bigBoyHeader");
+var confsGraph = document.getElementById("confsGraph");
+var foundWordsEl = document.getElementById("foundWords");
+var screenH = window.innerHeight
+|| document.documentElement.clientHeight
+|| document.body.clientHeight;
+
+confsGraph.style.height = String(screenH - getAbsoluteHeight(bigBoyHeader)) + "px";
+
+function getAbsoluteHeight(el) {
+  var styles = window.getComputedStyle(el);
+  var margin = parseFloat(styles['marginTop']) +
+               parseFloat(styles['marginBottom']);
+
+  return Math.ceil(el.offsetHeight + margin);
+}
+var trace1 = {
+    type: 'line',
+    x: confPoints,
+    y: dataPoints,
+    marker: {
+        color: '#C8A2C8',
+        line: {
+            width: 5
+        }
+    },
+    line: {
+        color: 'rgb(55, 128, 191)',
+        width: 5
+    }
+};
+
+var data = [ trace1 ];
+
+let dotdot = usingWilds ? '...' : '';
+
+var layout = {
+    title: {
+        text: '"' + originalWord + dotdot + '" Over the Past ' + confPoints.length + ' Conferences',
+        y: 0.94
+    },
+    font: {size: 18},
+    paper_bgcolor: 'rgb(240,240,240)',
+    plot_bgcolor: 'rgb(240,240,240)',
+    xaxis: {
+        zeroline: true,
+        gridcolor: 'rgb(111,111,111)',
+    },
+    yaxis: {
+        range: [0, (Math.max.apply(null,dataPoints) > 150 ? 375 : 175 )],
+        gridcolor: 'rgb(111,111,111)',
+    }
+};
+
+var config = {responsive: true}
+
+function generateGraph() {
+	Plotly.newPlot('confsGraph', data, layout, config );
+}
+//generateGraph();
+
+function showEverything() {
+    var toShowFoundWords = "<span>Found Words</span>";
+    if (usingWilds) {
+        for (let i = 0; i < foundWords.length; i++) {
+            toShowFoundWords += "<a>" + foundWords[i] + "</a><br>";
+        }
+        foundWordsEl.innerHTML = toShowFoundWords;
+        foundWordsEl.style.display = "block";
+    }
+    confsGraph.innerHTML = "";
+    layout.yaxis.range = [0, (Math.max.apply(null,dataPoints) > 150 ? 375 : 175 )];
+    generateGraph();
+
+    confsGraph.on('plotly_click', function(data) {
+        let linkConfName = trace1.x[data.points[0].pointIndex];
+        let thisLink = '/' + linkConfName + '/full.html?search=' + encodeURIComponent(originalWord);
+        //console.log(data);
+        if (data.event.shiftKey) {
+            window.location.href = thisLink;
+        }
+    });
+}
+
+window.onload = function () {
+    pageLoaded = true;
+    if (dataCounted) {
+        showEverything();
+    }
+    setTimeout(showEverything, 1000);
+}
+</script>
+</div>
+<center>
+</body>
+</html>

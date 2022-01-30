@@ -54,7 +54,7 @@ class ConfTools {
     // ###################################################  conference functions
     static getWholeText(thisConf) {
         var wholeTxt = "";
-        for (let i=0; i < 4; i++) {
+        for (let i=0; i < thisConf.sessions.length; i++) {
             for (let ii=0; ii < thisConf.sessions[i].talks.length; ii++) {
                 wholeTxt += thisConf.sessions[i].talks[ii].talkText;
             }

@@ -6,7 +6,7 @@ function fixerCountWords(newText, theMainTitle) {
     }
     newText = newText.replace(/(\r\n|\n|\r)/gm, " ");
     newText = newText.replace(/\.\s+/g, " ");
-    newText = newText.replace(/[,;\:"\?\!\$%#_\{\}/&\=\+\(\)\^\[\]\<\>\*\|]/g, " ");
+    newText = newText.replace(/[,;\:"\?\!\$%#_\{\}&\=\+\(\)\^\[\]\<\>\*\|]/g, " ");
     newText = newText.replace(/[\›\·\.\—\«\»\©\®\¶\¿\±\¬\¢\£\¤\¥\§\¯\°\-\–\\]/g, " ");
     newText = newText.replace(new RegExp("”","g"), " ");
     newText = newText.replace(/\s+/g, " ");
