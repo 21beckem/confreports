@@ -39,14 +39,20 @@ var dataCounted = false;
 
 function countOccurrences(arr, val) {
     return arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
-}    
-function countWords(str, substring) {
+}
+function stripOfSpecialChars(str) {
     str = str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
     str = str.replace(/\s{2,}/g," ");
     str = str.replace(/(^\s*)|(\s*$)/gi,"");
     str = str.replace(/[ ]{2,}/gi," ");
-    str = str.replace(/\n /,"\n");
-    return countOccurrences(str.split(' '), substring);
+    return str.replace(/\n /,"\n");
+}
+function countWords(str, substring) {
+    return countOccurrences(stripOfSpecialChars(str).split(' '), substring);
+}
+function countPhrases(str, substring) {
+    let regex = new RegExp(substring, 'g');
+    return (stripOfSpecialChars(str).match(regex) || []).length;
 }
 
 async function searchForWords() {
@@ -87,8 +93,8 @@ async function searchForWords() {
             let rawDataResponse = await fetch('/' + dirs[i] + '/data.json');
             let rawData = await rawDataResponse.text();
             let wholeTxt = ConfTools.getWholeText(JSON.parse(rawData));
-            console.log(wholeTxt);
-            dataPoints.push(parseInt(countWords(wholeTxt, word)));
+            dataPoints.push(parseInt(countPhrases(wholeTxt, word)));
+            console.log(dataPoints[dataPoints.length-1]);
             confPoints.push(dirs[i]);
         }
     }
