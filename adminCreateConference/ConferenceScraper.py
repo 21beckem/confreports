@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from progress.bar import Bar
 import requests, json, copy, re
 
 class ConferenceScraper:
@@ -11,35 +12,23 @@ class ConferenceScraper:
         if len(self.month)==1:
             self.month = "0" + self.month
         self.monthLetter = "O" if self.month=='10' else "A"
-    emptyConf = {
-        "date" : "",
-        "name" : "",
-        "sessions" : []
-    }
-    emptySession = {
-        "name" : "",
-        "talks" : []
-    }
-    emptyTalk = {
-        "speaker" : "",
-        "talkText" : ""
-    }
     def gatherUrls(self):
         r = requests.get("https://scriptures.byu.edu/citation_index/gc_ajax/" + str(self.year) + "/" + self.monthLetter)
         soup = BeautifulSoup(r.content, 'html.parser')
         talkBlocks = soup.find_all("ul", class_="talksblock")
         sessionInfo = []
+        sessionNames = []
         for session in talkBlocks:
             talksInfo = []
+            sessionNames.append(session.previous_sibling.previous_sibling.get_text())
             while not session.li is None:
-                #print(session.li.a)
                 onclick = session.li.a.attrs["onclick"]
                 onclick = re.findall(r"\('\d*?'\)", onclick)[0]
                 onclick = onclick[2:-2]
                 talksInfo.append(onclick)
                 session.li.decompose()
             sessionInfo.append(talksInfo)
-        return sessionInfo
+        return sessionInfo, sessionNames
 
     def gatherTalk(self, talkId):
         r = requests.get("https://scriptures.byu.edu/content/talks_ajax/" + str(talkId))
@@ -53,14 +42,40 @@ class ConferenceScraper:
         return speaker, body
 
     def getConference(self):
-        self.conf = copy.deepcopy(ConferenceScraper.emptyConf)
+        self.conf = {
+            "date" : "",
+            "name" : "",
+            "sessions" : []
+        }
+        self.conf['name'] = ("October " if self.month=='10' else "April ") + str(self.year) + ' General Conference'
         self.conf['date'] = str(self.month) + "-" + str(self.year)
-        for sessionData in self.gatherUrls():
+        allUrls, sessionNames = self.gatherUrls()
+        total = 0
+        for sessionData in allUrls:
             for talkId in sessionData:
-                speaker, text = self.gatherTalk(talkId)
+                total += 1
+        with Bar('Gathering Talks...', max=total, fill='■', suffix='%(percent).1f%% - %(eta)ds') as bar:
+            for i in range(len(allUrls)):
+                thisSession = {
+                    "name" : sessionNames[i],
+                    "talks" : []
+                }
+                for ii in range(len(allUrls[i])):
+                    speaker, text = self.gatherTalk(allUrls[i][i])
+                    speaker = re.sub(u'\xa0', u' ', speaker)
+                    text = re.sub(u'\xa0', u' ', text)
+                    newTalk = {
+                        "speaker" : speaker,
+                        "talkText" : text
+                    }
+                    thisSession['talks'].append(newTalk)
+                    bar.next()
+                self.conf['sessions'].append(thisSession)
+        return self.conf
         
             
 
 if __name__ == '__main__':
     thisConf = ConferenceScraper(2020, 4)
-    thisConf.getConference()
+    content = thisConf.getConference()
+    print(content)
