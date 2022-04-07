@@ -1,10 +1,10 @@
 <?php
 
 if (!isset($_GET['url'])) {
-    die("['urlNotSet']");
+    //die("['urlNotSet']");
 }
 
-$myURL = $_GET['url'];
+$myURL = "https://www.churchofjesuschrist.org/study/general-conference/2022/04?lang=eng";//$_GET['url'];
 
 include("simple_html_dom.php");
 
@@ -33,11 +33,12 @@ for ($x = 2; $x <= count($sessions[0]->children)+1; $x++) {
 }
 */
 $urls = array();
-foreach($html->find('a[class="sc-omeqik-0 bjUamY list-tile listTile-3yP_N"]') as $a) {
+foreach($html->find('a[class="sc-omeqik-0 bjUamY list-tile listTile-WHLxI"]') as $a) {
     //if (strpos($a->href, 'session') !== false) {
     //    $urls[] = $a->href;
     //} else {
         $urls[] = $a->href;
+        echo($a->href);
     //}
 }
 array_push($urls, "null-session");

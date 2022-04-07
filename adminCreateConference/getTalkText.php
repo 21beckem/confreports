@@ -1,11 +1,11 @@
 <?php
 
 if (!isset($_GET['url'])) {
-    die("['urlNotSet']");
+    //die("['urlNotSet']");
 }
 error_reporting(0);
 
-$myURL = $_GET['url'];
+$myURL = '\/study\/general-conference\/2022\/04\/58nelson';//$_GET['url'];
 
 include("simple_html_dom.php");
 

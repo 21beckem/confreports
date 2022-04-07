@@ -2,7 +2,7 @@ class confList {
     constructor() {
         // you edit only these 2 lines of code!!!!  leave the quotes on both sides of the name!
         this.firstConference = "2012april";
-        this.lastConference = "2021oct";
+        this.lastConference = "2022april";
     }
     getList() {
         let firstConf = parseFloat(this.firstConference.replace('april', '.0').replace('oct', '.5'));

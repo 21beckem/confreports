@@ -1,6 +1,3 @@
 beautifulsoup4
 requests
-json
-copy
-re
 progress
