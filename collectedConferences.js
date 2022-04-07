@@ -9,7 +9,7 @@ class confList {
         let lastConf = parseFloat(this.lastConference.replace('april', '.0').replace('oct', '.5'));
         var confs = Array();
         let counter = firstConf;
-        while (counter < lastConf) {
+        while (counter <= lastConf) {
             let fname = this.indexToFolderName(counter);
             confs.push(fname);
             counter += 0.5;

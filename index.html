@@ -7,7 +7,7 @@ async function pasteTiles(pasteContainerId) {
     document.getElementById(pasteContainerId).innerHTML = confTiles.join('');
 }
 function indexToConfName(thisI) {
-    var name = (Number.isInteger(thisI) ? 'April ' : 'October ');
+    var name = (thisI.includes("april") ? 'April ' : 'October ');
     thisI = parseFloat(thisI.replace('april', '').replace('oct', ''));
     name += Math.floor(thisI);
     return name;
