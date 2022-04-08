@@ -16,7 +16,7 @@ class ConferenceScraper:
         r = requests.get("https://www.churchofjesuschrist.org/study/general-conference/" + str(self.year) + "/" + self.month)
         soup = BeautifulSoup(r.content, 'html.parser')
         talkBlocks = soup.find_all("a", class_="sc-omeqik-0 bjUamY list-tile listTile-WHLxI")
-        print("Found", len(talkBlocks), "talks to gather...")
+        #print("Found", len(talkBlocks), "talks to gather...")
         sessionInfo = []
         sessionNames = []
         thisSession = []
@@ -33,6 +33,7 @@ class ConferenceScraper:
                 thisSession = []
             else:
                 thisSession.append(link)
+        sessionInfo.append(thisSession);
         return sessionInfo, sessionNames
 
     def gatherTalk(self, talkId):
