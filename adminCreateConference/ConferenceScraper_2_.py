@@ -24,6 +24,8 @@ class ConferenceScraper:
             link = talk.attrs['href']
             name = link.split('/')
             name = name[len(name)-1]
+            if "video" in name:
+                continue
             if 'session' in link:
                 sessionNames.append(name)
                 if not thisSession == []:
@@ -64,7 +66,7 @@ class ConferenceScraper:
                     "talks" : []
                 }
                 for ii in range(len(allUrls[i])):
-                    speaker, text = self.gatherTalk(allUrls[i][i])
+                    speaker, text = self.gatherTalk(allUrls[i][ii])
                     speaker = re.sub(u'\xa0', u' ', speaker)
                     text = re.sub(u'\xa0', u' ', text)
                     newTalk = {
@@ -75,10 +77,10 @@ class ConferenceScraper:
                     bar.next()
                 self.conf['sessions'].append(thisSession)
         return self.conf
-        
-            
+
+
 
 if __name__ == '__main__':
     thisConf = ConferenceScraper(2022, 4)
     content = thisConf.getConference()
-    print(content)
+    #print(content)
