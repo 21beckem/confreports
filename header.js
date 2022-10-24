@@ -66,7 +66,7 @@ function createHeader(option) {
     }
     toWrite += `<div id="bigBoyHeader" style="
                     border-radius: 50px 15px;
-                    background-color: rgb(240,240,240);
+                    background-color: rgb(170 217 255);
                     padding: 10px;
                     margin: -10px;
                     box-shadow: 1px 3px 5px rgba(34, 34, 34, 0.6);
