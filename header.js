@@ -87,10 +87,10 @@ function createHeader(option) {
     `;
 
     if (option.includes("goBack")) {
-        toWrite += `<a href="./" style="color:white;font-size: 25px;text-decoration: none;font-family: 'Roboto', sans-serif;">&#8594;Go Back</a>`;
+        toWrite += `<a href="./" style="color:black;font-size: 25px;text-decoration: none;font-family: 'Roboto', sans-serif;">&#8594;Go Back</a>`;
     }
     if (option.includes("goToFull")) {
-        toWrite += `<a href="full.html" style="color:white;font-size: 25px;text-decoration: none;font-family: 'Roboto', sans-serif;">&#8594;Full Text</a>`;
+        toWrite += `<a href="full.html" style="color:black;font-size: 25px;text-decoration: none;font-family: 'Roboto', sans-serif;">&#8594;Full Text</a>`;
     }
 
     toWrite += `</div>`;
