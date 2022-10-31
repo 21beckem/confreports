@@ -24,13 +24,17 @@ class confList {
 }
 
 const AllConfs = {
+    'October 2022' : {
+        'link' : '/2022oct/',
+        'thumbnail' : '/2022oct/thumbnail.jpg'
+    },
     'April 2022' : {
         'link' : '/2022april/',
         'thumbnail' : '/2022april/thumbnail.jpg'
     },
     'October 2021' : {
         'link' : '/2021oct/',
-        'thumbnail' : '/2021oct/thumbnail.jpg'
+        'thumbnail' : '/2021oct/thumbnail.png'
     },
     'April 2021' : {
         'link' : '/2021april/',
@@ -42,11 +46,11 @@ const AllConfs = {
     },
     'April 2020' : {
         'link' : '/2020april/',
-        'thumbnail' : '/2020april/thumbnail.jpg'
+        'thumbnail' : '/2020april/thumbnail.png'
     },
     '2010-2019' : {
         'link' : '/moreConfs/?name=2010-2019',
-        'thumbnail' : '/moreConfs/2010-2019.png',
+        'thumbnail' : '/moreConfsImg/2010-2019.png',
         'included_confs' : {
             'October 2019' : {
                 'link' : '/2019oct/',
