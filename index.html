@@ -5,6 +5,7 @@
 async function pasteTiles(pasteContainerId) {
     generateTiles();
     document.getElementById(pasteContainerId).innerHTML = confTiles.join('');
+    NEW_generateTiles();
 }
 function indexToConfName(thisI) {
     var name = (thisI.includes("april") ? 'April ' : 'October ');
@@ -20,6 +21,11 @@ function generateTiles() {
     for (let i = 0; i < list.length; i++) {
         confTiles.push('<a href="' + list[i] + '"><div class="confTile" style="background-image:linear-gradient(to bottom, rgba(255, 255, 255, .1), rgba(0, 0, 154, 0.5)),url(\'' + list[i] + '/thumbnail.png\');"><div class="confTitle">' + indexToConfName(list[i]) + '</div></div></a>');
     }
+}
+function NEW_generateTiles() {
+    Object.keys(AllConfs).forEach(key => {
+        console.log(key, obj[AllConfs]);
+    });
 }
     </script>
         <style>

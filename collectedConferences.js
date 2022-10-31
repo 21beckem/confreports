@@ -22,3 +22,40 @@ class confList {
         return Number.isInteger(thisI) ? thisI + 'april' : Math.floor(thisI) + 'oct';
     }
 }
+
+const AllConfs = {
+    'April 2022' : {
+        'link' : '/2022april/',
+        'thumbnail' : '/2022april/thumbnail.jpg'
+    },
+    'October 2021' : {
+        'link' : '/2021oct/',
+        'thumbnail' : '/2021oct/thumbnail.jpg'
+    },
+    'April 2021' : {
+        'link' : '/2021april/',
+        'thumbnail' : '/2021april/thumbnail.jpg'
+    },
+    'October 2020' : {
+        'link' : '/2020oct/',
+        'thumbnail' : '/2020oct/thumbnail.jpg'
+    },
+    'April 2020' : {
+        'link' : '/2020april/',
+        'thumbnail' : '/2020april/thumbnail.jpg'
+    },
+    '2010-2019' : {
+        'link' : '/moreConfs/?name=2010-2019',
+        'thumbnail' : '/moreConfs/2010-2019.png',
+        'included_confs' : {
+            'October 2019' : {
+                'link' : '/2019oct/',
+                'thumbnail' : '/2019oct/thumbnail.jpg'
+            },
+            'April 2019' : {
+                'link' : '/2019april/',
+                'thumbnail' : '/2019april/thumbnail.jpg'
+            }
+        }
+    }
+}
