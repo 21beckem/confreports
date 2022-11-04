@@ -1,7 +1,13 @@
 <html>
     <head>
-<script src="collectedConferences.js"></script>
+<script src="/collectedConferences.js"></script>
     <script>
+//get url params
+var url = new URL(window.Location);
+var confRange = url.searchParams.get("name");
+alert(confRange);
+
+
 async function pasteTiles(pasteContainerId) {
     generateTiles();
     document.getElementById(pasteContainerId).innerHTML = confTiles.join('');
