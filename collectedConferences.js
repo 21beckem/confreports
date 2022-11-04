@@ -49,7 +49,7 @@ const AllConfs = {
         'thumbnail' : '/2020april/thumbnail.png'
     },
     '2010-2019' : {
-        'link' : '/moreReports/?name=2010-2019',
+        'link' : '/moreReports.html?name=2010-2019',
         'thumbnail' : '/moreReports/2010-2019.png',
         'included_confs' : {
             'October 2019' : {
