@@ -6,7 +6,10 @@
         //get url params
         var url = new URL(window.location.href);
         var confRange = url.searchParams.get("name");
-        alert(confRange);
+        if (confRange == null) {
+            window.location.href = "/";
+        }
+        console.log(AllConfs[confRange]);
 
 
         async function pasteTiles(pasteContainerId) {
@@ -15,9 +18,9 @@
         }
         var confTiles = Array();
         function generateTiles() {
-            Object.keys(AllConfs).forEach(thisName => {
-                const thisTile = AllConfs[thisName];
-                confTiles.push('<a href="' + thisTile.link + '"><div class="confTile" style="background-image:url(\'' + thisTile.thumbnail + '\');"><div class="cover-gradient"></div><div class="confTitle">' + thisName + '</div></div></a>');
+            Object.keys(AllConfs[confRange].included_confs).forEach(thisName => {
+                const thisTile = AllConfs[confRange].included_confs[thisName];
+                confTiles.push('<a href="' + thisTile.link + '"><div class="confTile" style="background-image:url(\'' + confThumbnail(thisTile) + '\');"><div class="cover-gradient"></div><div class="confTitle">' + thisName + '</div></div></a>');
             });
         }
     </script>
@@ -67,8 +70,8 @@
             position: relative;
             margin: 10px;
             /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
-            width: 200px;
-            height: 257px;
+            width: 150px;
+            height: 200px;
             background-size: cover;
         }
 

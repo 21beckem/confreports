@@ -23,42 +23,102 @@ class confList {
     }
 }
 
+function confThumbnail(confObj) {
+    return confObj.link.split('/').slice(0, -1).join('/') + '/' + confObj.thumbnail;
+}
+
 const AllConfs = {
     'October 2022' : {
         'link' : '/2022oct/',
-        'thumbnail' : '/2022oct/thumbnail.jpg'
+        'thumbnail' : 'thumbnail.jpg'
     },
     'April 2022' : {
         'link' : '/2022april/',
-        'thumbnail' : '/2022april/thumbnail.jpg'
+        'thumbnail' : 'thumbnail.jpg'
     },
     'October 2021' : {
         'link' : '/2021oct/',
-        'thumbnail' : '/2021oct/thumbnail.png'
+        'thumbnail' : 'thumbnail.png'
     },
     'April 2021' : {
         'link' : '/2021april/',
-        'thumbnail' : '/2021april/thumbnail.jpg'
+        'thumbnail' : 'thumbnail.jpg'
     },
     'October 2020' : {
         'link' : '/2020oct/',
-        'thumbnail' : '/2020oct/thumbnail.jpg'
+        'thumbnail' : 'thumbnail.jpg'
     },
     'April 2020' : {
         'link' : '/2020april/',
-        'thumbnail' : '/2020april/thumbnail.png'
+        'thumbnail' : 'thumbnail.png'
     },
     '2010-2019' : {
         'link' : '/moreReports.html?name=2010-2019',
-        'thumbnail' : '/moreReports/2010-2019.png',
+        'thumbnail' : 'moreReports/2010-2019.png',
         'included_confs' : {
             'October 2019' : {
                 'link' : '/2019oct/',
-                'thumbnail' : '/2019oct/thumbnail.jpg'
+                'thumbnail' : 'thumbnail.jpg'
             },
             'April 2019' : {
                 'link' : '/2019april/',
-                'thumbnail' : '/2019april/thumbnail.jpg'
+                'thumbnail' : 'thumbnail.png'
+            },
+            'October 2018' : {
+                'link' : '/2018oct/',
+                'thumbnail' : 'thumbnail.jpg'
+            },
+            'April 2018' : {
+                'link' : '/2018april/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'October 2017' : {
+                'link' : '/2017oct/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'April 2017' : {
+                'link' : '/2017april/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'October 2016' : {
+                'link' : '/2016oct/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'April 2016' : {
+                'link' : '/2016april/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'October 2015' : {
+                'link' : '/2015oct/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'April 2015' : {
+                'link' : '/2015april/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'October 2014' : {
+                'link' : '/2014oct/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'April 2014' : {
+                'link' : '/2014april/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'October 2013' : {
+                'link' : '/2013oct/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'April 2013' : {
+                'link' : '/2013april/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'October 2012' : {
+                'link' : '/2012oct/',
+                'thumbnail' : 'thumbnail.png'
+            },
+            'April 2012' : {
+                'link' : '/2012april/',
+                'thumbnail' : 'thumbnail.png'
             }
         }
     }

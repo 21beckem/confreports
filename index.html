@@ -10,7 +10,7 @@ var confTiles = Array();
 function generateTiles() {
     Object.keys(AllConfs).forEach(thisName => {
         const thisTile = AllConfs[thisName];
-        confTiles.push('<a href="' + thisTile.link + '"><div class="confTile" style="background-image:url(\'' + thisTile.thumbnail + '\');"><div class="cover-gradient"></div><div class="confTitle">' + thisName + '</div></div></a>');
+        confTiles.push('<a href="' + thisTile.link + '"><div class="confTile" style="background-image:url(\'' + confThumbnail(thisTile) + '\');"><div class="cover-gradient"></div><div class="confTitle">' + thisName + '</div></div></a>');
     });
 }
     </script>
