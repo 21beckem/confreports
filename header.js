@@ -100,15 +100,15 @@ function createHeader(option) {
     toWrite += `</div>`;
 	if (option.includes("forceHTTP")) {
 		toWrite += `<script>
-		alert(window.location.protocol);
+		//alert(window.location.protocol);
 		if (window.location.protocol !== 'http:') {
 			window.location.href = window.location.href.replace('https', 'http');
 		}
 		</script>`;
 	} else {
 		toWrite += `<script>
-		alert(window.location.protocol);
-		if (window.location.protocol !== 'http:') {
+		//alert(window.location.protocol);
+		if (window.location.protocol !== 'https:') {
 			window.location.href = window.location.href.replace('http', 'https');
 		}
 		</script>`;
