@@ -7,7 +7,8 @@ console.log(`OPTIONS:
  "full"
  "overview"
  "home"
- "graph"`);
+ "graph"
+ "http"`);
 
 function write(page) {
     options = "";
@@ -22,6 +23,9 @@ function write(page) {
     }
     if (page.includes("graph")) {
         options += " goBack";
+    }
+    if (page.includes("http")) {
+        options += " forceHTTP";
     }
     createHeader(options);
 }
@@ -94,6 +98,12 @@ function createHeader(option) {
     }
 
     toWrite += `</div>`;
+	if (option.includes("forceHTTP")) {
+		toWrite += `<script>
+		if (location.protocol !== 'https:') { 
+		}
+		</script>`;
+	}
 
     document.write(toWrite);
 }
