@@ -51,8 +51,8 @@ function fetchGraph() {
 	u += (_('descrete').checked) ? '' : '&ctrlfmatch=true';
 	alert(u);
 	fetch(u)
-        .then(res => { return JSON.parse(res.text()); })
-        .then(res => {
+        .then((res) => res.json())
+        .then((res) => {
             alert(res);
             generateGraph(res);
         });
