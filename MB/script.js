@@ -50,7 +50,7 @@ function fetchGraph() {
 	u += '&del=';
 	u += encodeURI(_('del').value);
 	u += (_('descrete').checked) ? '' : '&ctrlfmatch=true';
-	console.log(u);
+	alert(u);
 	fetch(u)
         .then(res => { return JSON.parse(res.text()); })
         .then(res => {
