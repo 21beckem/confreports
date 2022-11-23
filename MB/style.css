@@ -1,0 +1,80 @@
+html, body {
+	height: 100%;
+}
+#confsGraph {
+	height: calc(100% - 56px);
+}
+.sidenav {
+	width: 170px;
+	position: fixed;
+	z-index: 1;
+	top: 150px;
+	left: 10px;
+	background: #eee;
+	overflow-x: hidden;
+	padding: 8px 0;
+}
+
+.sidenav span {
+	padding: 6px 8px 6px 16px;
+	text-decoration: none;
+	font-size: 22px;
+	color: #2196F3;
+	display: block;
+}
+.sidenav a {
+	padding: 6px 8px 6px 16px;
+	text-decoration: none;
+	font-size: 15px;
+}
+
+.sidenav a:hover {
+	color: #064579;
+}
+
+.main {
+	margin-left: 140px; /* Same width as the sidebar + left position in px */
+	font-size: 28px; /* Increased text to enable scrolling */
+	padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+}
+/* end conf-graph */
+
+.recourceSelected {
+	background-color: #32d5faff;
+	color: white;
+}
+
+
+.wideTable {
+	width: 100%;
+}
+.searchBox {
+	width: 25%;
+}
+.dataTitle {
+	margin-bottom: -15px;
+}
+#del {
+	border-radius: 20px;
+	padding: 10px;
+	border-color: black;
+	border-width: 2px;
+}
+#graphBtn {
+	padding: 10px;
+	border-radius: 20px 10px 20px 10px;
+	width: 50%;
+	background-color: #5dbdf5;
+	border: none;
+	box-shadow: rgba(0, 0, 0, 0.4) 3px 3px 5px;
+	cursor: pointer;
+}
+#graphBtn:disabled {
+	background-color: #afbfc9;
+	box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 0px;
+}
