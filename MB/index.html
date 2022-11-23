@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <link rel="stylesheet" href="autocomplete.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="/header.js"></script>
+    <script src="/loadingcss.js"></script>
+    <script>
+      write("graph")
+
+    </script>
+  </head>
+
+  <body>
+    <br>
+    <table class="wideTable">
+      <tr>
+        <th class="searchBox">
+          <div class="dataTitle">Where to search:</div><br>
+          <div class="autoComplete_wrapper">
+            <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" oninput="updateCanISubmit()">
+          </div>
+        </th>
+        <th class="searchBox">
+          <div class="dataTitle">What to search:</div><br>
+          <input oninput="updateCanISubmit()" type="text" name="del" id="del" placeholder="to search...">
+        </th>
+        <th class="searchBox">
+          <div class="dataTitle">How to search:</div><br>
+          <input type="checkbox" name="descrete" id="descrete" checked> whole words
+        </th>
+        <th class="searchBox">
+          <div class="dataTitle">Ready to search:</div><br>
+          <button id="graphBtn" onclick="fetchGraph()">Graph!</button>
+        </th>
+      </tr>
+    </table>
+    <div id="confsGraph" style="width:90%;"><br><br><br><br>
+      <!--<div id="loading">
+        <script src="/loadinghtml.js"></script>
+      </div>-->
+    </div>
+    <script src="/graph/plotly-latest.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@10.2.7/dist/autoComplete.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+
+</html>
