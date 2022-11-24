@@ -103,14 +103,14 @@ function createHeader(option) {
 		//alert(window.location.protocol);
 		if (window.location.protocol !== 'http:') {
                         //alert('changing protocol');
-			window.location.href = window.location.href.replace('https', 'http');
+			//window.location.href = window.location.href.replace('https', 'http');
 		}
 		</script>`;
 	} else {
 		toWrite += `<script>
 		//alert(window.location.protocol);
 		if (window.location.protocol !== 'https:') {
-			window.location.href = window.location.href.replace('http', 'https');
+			//window.location.href = window.location.href.replace('http', 'https');
 		}
 		</script>`;
 	}
