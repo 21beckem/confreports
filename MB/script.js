@@ -50,11 +50,11 @@ function fetchGraph() {
 	u += encodeURI(_('del').value);
 	u += (_('descrete').checked) ? '' : '&ctrlfmatch=true';
 	alert(u);
-	fetch(u).then((res) => {alert(res.text());});
-        /*.then((res) => res.json()).then((res) => {
+	fetch(u)
+        .then((res) => res.json()).then((res) => {
             alert(res);
             generateGraph(res);
-        });*/
+        });
 	//generateGraph( [[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,1,0,0,0,0,0],["\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p1#p1","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p2#p2","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p3#p3","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p4#p4","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p5#p5","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p6#p6","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p7#p7","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p8#p8","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p9#p9","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p10#p10","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p11#p11","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p12#p12","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p13#p13","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p14#p14","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p15#p15","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p16#p16","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p17#p17","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p18#p18","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p19#p19","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p20#p20","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p21#p21","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p22#p22","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p23#p23","\/study\/scriptures\/bofm\/1-ne\/2?lang=eng&id=p24#p24"]] );
 }
 
