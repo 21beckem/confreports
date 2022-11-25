@@ -44,7 +44,7 @@ function fetchGraph() {
 	// location
 	// del
 	// ctrlfmatch
-	let u = 'http://ldschurchbomgraph.atwebpages.com/graph.php?location=';
+	let u = 'https://mbgrapher.000webhostapp.com/graph.php?location=';
 	u += encodeURI(_('autoComplete').value);
 	u += '&del=';
 	u += encodeURI(_('del').value);
