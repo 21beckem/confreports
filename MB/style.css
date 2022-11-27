@@ -1,3 +1,14 @@
+            #loginForm {
+                background-color: rgb(240,240,240);
+                width: 85%;
+                padding-top: 20px;
+                padding-left: 60px;
+                padding-right: 40px;
+                padding-bottom: 40px;
+                margin: auto;
+                box-shadow: 1px 3px 5px rgba(34,34,34,0.6);
+                text-align: left;
+            }
 html, body {
 	height: 100%;
 }
