@@ -15,7 +15,7 @@ html, body {
 	height: calc(100% - 100px);
 }
 #outputGraph {
-	height: calc(100% - 156px);
+	height: 100%;
         width: 100%;
         border: none;
         overflow: hidden;
