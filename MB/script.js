@@ -25,15 +25,15 @@ function _(x) { return document.getElementById(x); }
 var isRSet = false;
 let rChanged = true;
 function setRecourceStatus(yaNo) {
-	rinput = _('autoComplete');
-        rChanged = !yaNo;
-	if (yaNo) {
+    rinput = _('autoComplete');
+    rChanged = !yaNo;
+    if (yaNo) {
         rinput.classList.add('recourceSelected');
     } else {
         rinput.classList.remove('recourceSelected')
     }
-	isRSet = yaNo;
-	updateCanISubmit();
+    isRSet = yaNo;
+    updateCanISubmit();
 }
 function updateCanISubmit(thing) {
     if (thing == 'loc') {
