@@ -19,12 +19,12 @@
         <th class="searchBox">
           <div class="dataTitle">Where to search:</div><br>
           <div class="autoComplete_wrapper">
-            <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" oninput="updateCanISubmit()">
+            <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" oninput="updateCanISubmit('loc')">
           </div>
         </th>
         <th class="searchBox">
           <div class="dataTitle">What to search:</div><br>
-          <input oninput="updateCanISubmit()" type="text" name="del" id="del" placeholder="to search...">
+          <input oninput="updateCanISubmit('del')" type="text" name="del" id="del" placeholder="to search...">
         </th>
         <th class="searchBox">
           <div class="dataTitle">How to search:</div><br>
