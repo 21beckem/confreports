@@ -23,8 +23,10 @@ const autoCompleteJS = new autoComplete({
 // end autocomplete stuff
 function _(x) { return document.getElementById(x); }
 var isRSet = false;
+let rChanged = true;
 function setRecourceStatus(yaNo) {
 	rinput = _('autoComplete');
+        rChanged = !yaNo;
 	if (yaNo) {
         rinput.classList.add('recourceSelected');
     } else {
@@ -33,8 +35,13 @@ function setRecourceStatus(yaNo) {
 	isRSet = yaNo;
 	updateCanISubmit();
 }
-function updateCanISubmit() {
-		_('graphBtn').disabled = (!isRSet || _('del').value == '');
+function updateCanISubmit(thing) {
+    if (thing == 'loc') {
+        rChanged = true;
+        isRSet = false;
+        rinput.classList.remove('recourceSelected');
+    }
+    _('graphBtn').disabled = (!isRSet || _('del').value == '');
 }
 // end of boring search stuff
 function fetchGraph() {
