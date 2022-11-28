@@ -39,6 +39,7 @@ function updateCanISubmit(thing) {
     if (thing == 'loc') {
         rChanged = true;
         isRSet = false;
+	rinput = _('autoComplete');
         rinput.classList.remove('recourceSelected');
     }
     _('graphBtn').disabled = (!isRSet || _('del').value == '');
