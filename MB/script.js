@@ -56,7 +56,7 @@ function fetchGraph() {
 	u += '&del=';
 	u += encodeURI(_('del').value);
 	u += (_('descrete').checked) ? '' : '&ctrlfmatch=true';
-	alert(u);
+	//alert(u);
 	_('outputGraph').parentElement.innerHTML = '<iframe id="outputGraph"></iframe>';
         _('outputGraph').src = u;
 }
