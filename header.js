@@ -18,9 +18,6 @@ function write(page) {
     if (page.includes("overview")) {
         options += " goToFull";
     }
-    if (page.includes("home")) {
-        options += " trends";
-    }
     if (page.includes("graph")) {
         options += " goBack";
     }
@@ -37,21 +34,7 @@ function createHeader(option) {
     }
     toWrite += `<div style="position:sticky;z-index:10;top:30px;left:20px;transform:translateY(-20px); color:black;">`;
     
-    if (option.includes("trends")) {
-        toWrite += `<div style="
-                position:absolute;
-                right:30%;
-                top:0px;
-                margin:10px;
-                padding:10px;
-                cursor:pointer;
-                border-radius:20px 7px;
-                border:1px solid black;
-            " onclick="window.location.href = '/graph/'">
-            <i class="fa fa-line-chart" style="font-size:40px;vertical-align:middle;"></i>
-            <a style="margin-left:10px;font-size:20px;">Visualize Trends</a>
-        </div>`;
-    } else if (option.includes("search")) {
+    if (option.includes("search")) {
         toWrite += `<div style="
                 position:absolute;
                 right:30%;
