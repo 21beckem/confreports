@@ -12,8 +12,8 @@
 html, body {
 	height: 100%;
 }
-#confsGraph {
-	height: calc(100% - 56px);
+#outputGraph {
+	height: calc(100% - 156px);
 }
 .sidenav {
 	width: 170px;
