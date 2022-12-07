@@ -1,4 +1,4 @@
-{
+const chapterLinks = {
     "2. 1 Nephi" : [
         [
             "1 Nephi 1"
@@ -1502,4 +1502,4 @@
 		]
 
 	]
-}
+};
