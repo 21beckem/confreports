@@ -1,12 +1,41 @@
 const chapterLinks = {
+	"1. Inledning" : [
+		[
+			"",
+			"1.Titelbladet"
+		],
+		[
+			"",
+			"2. Inledning"
+		],
+		[
+			"",
+			"3. Tre vittnens vittnesbörd"
+		],
+		[
+			"",
+			"4. Åtta vittnens vittnesbörd"
+		],
+		[
+			"",
+			"5. Joseph Smiths vittnesbörd"
+		],
+		[
+			"",
+			"6. Kortfattad förklaring av Mormons bok"
+		]
+	]
     "2. 1 Nephi" : [
         [
+			"",
             "1 Nephi 1"
         ],
         [
+			"",
             "1 Nephi 2"
         ],
         [
+			"",
             "1 Nephi 3"
         ],
         [
