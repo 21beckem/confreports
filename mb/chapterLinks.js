@@ -24,7 +24,7 @@ const chapterLinks = {
 			"",
 			"6. Kortfattad förklaring av Mormons bok"
 		]
-	]
+	],
     "2. 1 Nephi" : [
         [
 			"",
@@ -322,6 +322,7 @@ const chapterLinks = {
             "/study/scriptures/bofm/omni/1?lang=eng",
             "Omni"
         ],
+	[
             "/study/scriptures/bofm/w-of-m/1?lang=eng",
             "Mormons ord"
         ]
