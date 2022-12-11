@@ -3,7 +3,7 @@
 function _(x) {return document.getElementById(x);}
 const audioPlayer = _('audioPlayer');
 const books = Object.keys(chapterLinks);
-const bookNames = ["Inledning","1 Nephi","2 Nephi","Jakob","Enos - Mormons ord","Mosiah","Alma","Helaman","3 Nephi","4 Nephi","Mormon"];
+const bookNames = ["Inledning","1 Nephi","2 Nephi","Jakob","Enos","Jarom","Omni","Mormons ord","Mosiah","Alma","Helaman","3 Nephi","4 Nephi","Mormon"];
 let helpObj = new Object();
 
 let toWrite = '';
