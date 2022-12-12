@@ -1,12 +1,12 @@
 .slider-bar {
-	--thumb-height: 7px;
+	--thumb-height: 12px;
 	--track-height: 7px;
 	--track-color: rgba(0, 0, 0, 0.2);
 	--brightness-hover: 180%;
 	--brightness-down: 80%;
 	--clip-edges: 0.125em;
-	--thumb-width: 1px;
-	--clip-edges: 0;
+	--thumb-width: 4px;
+	--clip-edges: 2px;
 }
 
 /* === range commons === */
