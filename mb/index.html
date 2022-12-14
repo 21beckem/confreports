@@ -1,31 +1,386 @@
 <head>
-  <link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="slider-bar.css">
+<style>
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+:root {
+    --bg-color: linear-gradient(135deg, white 0%, #dbecff 100%);
+    --bg-blue: #0c62c4;
+    --bg-card: linear-gradient(135deg, white -105%, #42a7cf 300%);
+    --box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    --black-color: #333;
+    --gray-color: gray;
+    --orange-color: #ffc72b;
+    --progress: 0%;
+    --main: #188fc3;
+    --secondary: rgb(255 255 255 / 22%);
+    --accent: #a36013;
+}
 
+body, html {
+    background: var(--bg-color);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+
+/* accordion stuff... */
+.accordion {
+  font-weight: bold;
+  color: var(--black-color);
+  background-color: var(--secondary);
+  cursor: pointer;
+  padding: 18px 30px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s ease;
+  box-shadow: inset 0px 11px 0px -9px var(--orange-color);
+}
+.accordion:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  float: right;
+  margin-left: 5px;
+}
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+.active {
+  background: var(--bg-card);
+  color: var(--black-color);
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+#scrollingSpacer {
+    width: 100%;
+    height: 300px;
+    padding: 0;
+    margin: 0;
+}
+.mscBtn {
+    width: 49%;
+    background-color: rgba(0,0,0,0);
+    display: inline-block;
+    border: none;
+    margin: 0;
+    padding: 5px;
+    box-shadow: 0px 11px 0px -10px var(--orange-color);
+}
+
+.container {
+  padding: 8px;
+  width: 95%;
+  height: auto;
+  border-radius: 20px;
+  background-image: var(--bg-card);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform:translate(-50%, 0);
+  z-index: 5;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin: 8px 0 24px;
+}
+
+.header .playing {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.alink1,
+.alink2,
+.alink3,
+.alink4 {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0,0,0,0);
+  height: 40px;
+}
+
+.alink i {
+  width: 20px;
+  font-size: 20px;
+}
+
+.song_info {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.song_info .song_name {
+  margin-bottom: 8px;
+  font-size: 20px;
+}
+
+.timeline .dueration {
+  font-size: 12px;
+}
+
+.timeline, .timeline .time{
+  width:100%;
+}
+
+.timeline .dueration .current {
+  float: left;
+}
+
+.timeline .dueration .total {
+    float: right;
+}
+
+.timeline .time::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.timeline .slider .progress {
+  width: var(--progress);
+  height: 100%;
+  pointer-events: none;
+  background: var(--orange-color);
+  position: absolute;
+}
+
+.timeline .slider .progress .pin {
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  pointer-events: all;
+  background: var(--black-color);
+  position: absolute;
+  right: -5px;
+  top: -3px;
+}
+
+.controls {
+  margin: 15px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: relative;
+}
+.slider-bar {
+  width: 100%;
+  color: var(--orange-color);
+}
+#accordionWrapper {
+    padding: 10px;
+    margin: 0;
+}
+</style>
+</head>
 <body>
 <script src="recources.js"></script>
 
-<div class="audioBox">
-  <audio controls id="audioPlayer"></audio>
+<div id="accordionWrapper">
+    <div id="chapterAccordions"></div>
 </div>
 
-<div id="chapterAccordions">
-  <!--<button class="accordion" onclick="accordion(this)">Section 1</button>
-  <div class="panel">
-    <p>1 Lorem ipsum...</p>
-  </div>
+<div id="scrollingSpacer"></div>
 
-  <button class="accordion" onclick="accordion(this)">Section 2</button>
-  <div class="panel">
-    <p>2 Lorem ipsum...</p>
-  </div>
+<div class="container">
+    <div class="content">
+        <div class="song_info">
+            <div id="trackName" class="song_name">Mormons Bok Läsaren</div>
+        </div>
+        
+        <div class="timeline">
+            <div class="dueration">
+                <span id="currentTid" class="current">0:00</span>
+                <span id="totalTid" class="total">0:00</span>
+            </div>
 
-  <button class="accordion" onclick="accordion(this)">Section 3</button>
-  <div class="panel">
-    <p>3 Lorem ipsum...</p>
-  </div>-->
+            <div class="slider">
+              <input oninput="seek()" type="range" id="slider-bar" class="slider-bar" min="0" max="1000" value="0">
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <button onclick="backBtn()" class="alink2"><i class="fas fa-step-backward"></i></button>
+
+        <button id="playpause" onclick="playPause()" class="alink3"><i class="fas fa-play"></i></button>
+
+        <button onclick="nextBtn()" class="alink4"><i class="fas fa-step-forward"></i></button>
+    </div>
 </div>
 
+<script>
+//console.log(chapterLinks);
+//console.log(fullList);
+function _(x) {return document.getElementById(x);}
+const aa = document.createElement("AUDIO");
+const prog = _('slider-bar');
+const r = document.querySelector(':root');
+const currentTid = _('currentTid');
 
-<script src="script.js"></script>
+const books = Object.keys(chapterLinks);
+const bookNames = ["Inledning","1 Nephi","2 Nephi","Jakob","Enos","Jarom","Omni","Mormons ord","Mosiah","Alma","Helaman","3 Nephi","4 Nephi","Mormon"];
+let helpObj = new Object();
+
+let toWrite = '';
+let counter = 0;
+for (i=0; i<books.length; i++) {
+  toWrite += '<button class="accordion" onclick="accordion(this)">' + bookNames[i] + '</button><div class="panel"><br>';
+  
+  for (ii=0; ii<chapterLinks[books[i]].length; ii++) {
+    const thisBok = chapterLinks[books[i]][ii];
+    //console.log(thisBok);
+    toWrite += '<button class="mscBtn" id="trackBtn' + String(counter) + '" onclick="selectTrack(this.id)">' + thisBok[0] + '</button>';
+    
+    //createHelpObject
+    let thisHelper = {
+      name: thisBok[0],
+      link: fullList[counter][1],
+      prevId: "trackBtn" + String(counter - 1),
+      nextId: "trackBtn" + String(counter + 1)
+    }
+    helpObj['trackBtn' + String(counter)] = thisHelper;
+    
+    counter++;
+  }
+  
+  toWrite += '<br><br></div>';
+}
+toWrite += '<button class="accordion" onclick="accordion(this)">Ether</button><div class="panel" style=""><br> Inspelning pågår <br><br></div>';
+toWrite += '<button class="accordion" onclick="accordion(this)">Moroni</button><div class="panel" style=""><br> Inspelning pågår <br><br></div>';
+_("chapterAccordions").innerHTML = toWrite;
+//console.log(helpObj);
+var currentTrack = null;
+function selectTrack(trackId) {
+    updateTrackInfo(trackId);
+    aa.play();
+  //console.log(helpObj[trackId]);
+}
+function updateTrackInfo(thisId = null) {
+    if (thisId != null) {
+        prog.value = 0;
+        currentTrack = helpObj[thisId];
+        aa.src = 'https://21beckem.github.io/MormonsBokAudio/' + currentTrack['link'];
+    }
+    _('trackName').innerHTML = currentTrack['name'];
+    document.title = currentTrack['name'];
+    _('totalTid').innerHTML = fancyTimeFormat(aa.duration);
+}
+
+
+// all the custom audio stuff:
+function fancyTimeFormat(duration)
+{   
+    var hrs = ~~(duration / 3600);
+    var mins = ~~((duration % 3600) / 60);
+    var secs = ~~duration % 60;
+    var ret = "";
+    if (hrs > 0) { ret += "" + hrs + ":" + (mins < 10 ? "0" : ""); }
+    ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+    ret += "" + secs;
+    return ret;
+}
+let updateInt = null;
+aa.onplay = function() {
+    _('playpause').innerHTML = '<i class="fas fa-pause"></i>';
+    updateInt = setInterval(updateDuration,1000);
+    updateTrackInfo();
+}
+aa.onpause = function() {
+    clearInterval(updateInt);
+    _('playpause').innerHTML = '<i class="fas fa-play"></i>';
+}
+aa.onloadeddata = function() {
+    updateTrackInfo();
+    prog.value = 0;
+}
+
+function seek() {
+    aa.pause();
+    let dur = (prog.value / 1000) * aa.duration
+    currentTid.innerHTML = fancyTimeFormat(dur);
+    aa.currentTime = dur;
+}
+function nextBtn() {
+    updateTrackInfo(currentTrack.nextId);
+    aa.currentTime = 0;
+    aa.play();
+}
+function backBtn() {
+    //add a chrck if its within the first few seconds
+    updateTrackInfo(currentTrack.prevId);
+    aa.currentTime = 0;
+    aa.play();
+}
+function playPause() {
+    if (!aa.paused) {
+        aa.pause();
+    } else {
+        aa.play();
+    }
+}
+function getPerc() {
+    return Math.floor((aa.currentTime / aa.duration) * 1000);
+}
+function updateDuration() {
+    currentTid.innerHTML = fancyTimeFormat(aa.currentTime);
+    prog.value = getPerc();
+}
+
+//don't forget to set the name of the track to the tile of the webpage!
+
+navigator.mediaSession.setActionHandler('previoustrack', () => {
+    backBtn();
+});
+navigator.mediaSession.setActionHandler('nexttrack', () => {
+    nextBtn();
+});
+
+
+//  all the accordion stuff :)
+function accordion(el) {
+  el.classList.toggle("active");
+  closeAllExcept(el);
+  let panel = el.nextElementSibling;
+  if (panel.style.maxHeight) {
+    panel.style.maxHeight = null;
+  } else {
+    panel.style.maxHeight = panel.scrollHeight + "px";
+  }
+}
+function closeAllExcept(el) {
+  let allBtns = document.getElementsByClassName("accordion");
+  for (i=0; i<allBtns.length; i++) {
+    if (allBtns[i] == el)
+      continue;
+    allBtns[i].classList.remove("active");
+    allBtns[i].nextElementSibling.style.maxHeight = null;
+  }
+}
+</script>
 </body>
