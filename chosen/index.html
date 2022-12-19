@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Chosen</title>
+
+    <style>
+* {
+    box-sizing: border-box;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: unset;
+    background-color: rgb(21, 21, 21);
+}
+#videoSlider {
+    position: fixed;
+    width: 100%;
+    height: 20%;
+    bottom: 0;
+    box-shadow: inset 0px 10px 10px black;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+}
+.episodeSpacer {
+    height: 100%;
+    aspect-ratio: 1.7;
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
+    transition: aspect-ratio 0.5s ease;
+}
+.blankEp {
+    background-color: black;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.episodeSpacer:has(.selected) {
+    height: 100%;
+    aspect-ratio: .5;
+    display: inline-block;
+    margin: 0;
+    padding: 10px;
+}
+.vidImgContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    /* background-color: brown; */
+    border-radius: 5px;
+    overflow: hidden;
+    transition: position 1s linear;
+}
+.selected {
+    position: fixed;
+    width: calc(100% - 20px);
+    height: 60%;
+    padding: 0;
+    border-radius: 0px;
+    top: 100px;
+    left: 10px;
+    /* background-color: lightblue; */
+}
+.vidImgContainer img {
+    display: block;
+    width: 100%;
+}
+.selected img {
+    display: none;
+    width: 100%;
+}
+.vidImgContainer video {
+    display: none;
+    width: 100%;
+}
+.selected video {
+    display: block;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ssmLogo {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    height: 75px;
+}
+    </style>
+
+</head>
+<body>
+
+<img class="ssmLogo" src="https://confreports.org/inbound338041097023464463.png">
+
+<div id="videoSlider">
+    <!--<div class="episodeSpacer">
+        <div class="vidImgContainer selected" onclick="clickEpisode(this)">
+            <video poster="https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg" controls>
+                <source src="https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E1%20Thunder.mp4">
+                I think your browser might be too old to handle this...
+            </video>
+            <img src="https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg" alt="S2 E1">
+        </div>
+        <div class="blankEp"></div>
+    </div>-->
+</div>
+ 
+<script>
+const Chosen2 = {
+    "Thunder" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg",
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E1%20Thunder.mp4"
+    },
+    "I Saw You" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_2.jpeg",
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E2%20I%20Saw%20You.mp4"
+    },
+    "Matthew 4:24" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_3.jpeg",
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E3%20Mathew%204-24.mp4"
+    },
+    "The Perfect Opportunity" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_4.jpeg",
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E4%20The%20Perfect%20Opportunity.mp4"
+    },
+    "Spirit" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_5.jpeg",
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E5%20Spirit.mp4"
+    },
+    "Unlawful" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_6.jpeg",
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E6%20Unlawful.mp4"
+    },
+    "Reckoning" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_7.jpeg",
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E7%20Reckoning.mp4"
+    },
+    "Beyond Mountains" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_8.jpeg",
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E8%20Beyond%20Mountains.mp4"
+    }
+};
+
+let CurrentSeason = null;
+function clickEpisode(el) {
+    var nodes = document.getElementById('videoSlider').childNodes;
+    for(var i=0; i<nodes.length; i++) {
+        if (nodes[i].nodeName.toLowerCase() == 'div') {
+            //console.log(nodes[i].firstChild);
+            nodes[i].firstChild.classList.remove('selected');
+        }
+    }
+    el.classList.add('selected');
+    let theSelected = el.firstChild;
+    theSelected.src = CurrentSeason[theSelected.getAttribute("name")].videoSrc;
+}
+
+function loadPage(season) {
+    CurrentSeason = season;
+    var parent = document.getElementById('videoSlider');
+    let toWrite = "";
+    let epNames = Object.keys(CurrentSeason);
+    for (let i = 0; i < epNames.length; i++) {
+        const ep = CurrentSeason[epNames[i]];
+        let first = (i==0) ? ' selected' : '';
+        toWrite += '<div class="episodeSpacer"><div class="vidImgContainer' + first + '" onclick="clickEpisode(this)"><video name="' + epNames[i] + '" poster="' + ep.thumbnail + '" controls><source src="">I think your browser might be too old to handle this...</video><img src="' + ep.thumbnail + '" alt="E' + String(i+1) + '"></div><div class="blankEp"></div></div>';
+    }
+    parent.innerHTML = toWrite;
+
+    let theSelected = document.getElementsByClassName('selected')[0].firstChild;
+    theSelected.src = CurrentSeason[theSelected.getAttribute("name")].videoSrc;
+}
+
+loadPage(Chosen2);
+</script>
+</body>
+</html>
