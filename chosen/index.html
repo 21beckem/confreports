@@ -125,35 +125,43 @@ html, body {
 const Chosen2 = {
     "Thunder" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg",
-        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E1%20Thunder.mp4"
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E1%20Thunder.mp4",
+        "driveId" : "1QhwZXKeq3iheFvS_YFeFN1DJhoziXVWA"
     },
     "I Saw You" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_2.jpeg",
-        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E2%20I%20Saw%20You.mp4"
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E2%20I%20Saw%20You.mp4",
+        "driveId" : "1GEMc_ykx59LndBuFCFnaxOsGFP1BQeqC"
     },
     "Matthew 4:24" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_3.jpeg",
-        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E3%20Mathew%204-24.mp4"
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E3%20Mathew%204-24.mp4",
+        "driveId" : "1Z43Slk_rAcwtpNw8O72vT8dNtGPoBoL0"
     },
     "The Perfect Opportunity" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_4.jpeg",
-        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E4%20The%20Perfect%20Opportunity.mp4"
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E4%20The%20Perfect%20Opportunity.mp4",
+        "driveId" : "1sPavM0A6kEoXSx071hWIK47Ma4EVZmDB"
     },
     "Spirit" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_5.jpeg",
-        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E5%20Spirit.mp4"
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E5%20Spirit.mp4",
+        "driveId" : "1alt40sK72yAXkh8V-Z1LYLh-HNfSkA_P"
     },
     "Unlawful" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_6.jpeg",
-        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E6%20Unlawful.mp4"
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E6%20Unlawful.mp4",
+        "driveId" : "1aML6gD3kYBJDNucTNPTjxJx1-1IugHGy"
     },
     "Reckoning" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_7.jpeg",
-        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E7%20Reckoning.mp4"
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E7%20Reckoning.mp4",
+        "driveId" : "1ug-A27aC6p3FEqusNN8qSKAekoRqYZV4"
     },
     "Beyond Mountains" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_8.jpeg",
-        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E8%20Beyond%20Mountains.mp4"
+        "videoSrc" : "https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E8%20Beyond%20Mountains.mp4",
+        "driveId" : "12VG3La4sG8fZONenKyMYBF1Ze5JVnyIL"
     }
 };
 
@@ -168,7 +176,7 @@ function clickEpisode(el) {
     }
     el.classList.add('selected');
     let theSelected = el.firstChild;
-    theSelected.src = CurrentSeason[theSelected.getAttribute("name")].videoSrc;
+    theSelected.src = 'http://drive.google.com/uc?confirm=t&id=' + CurrentSeason[theSelected.getAttribute("name")].driveId;
 }
 
 function loadPage(season) {
@@ -178,13 +186,13 @@ function loadPage(season) {
     let epNames = Object.keys(CurrentSeason);
     for (let i = 0; i < epNames.length; i++) {
         const ep = CurrentSeason[epNames[i]];
-        let first = (i==0) ? ' selected' : '';
+        //let first = (i==0) ? ' selected' : '';
+        let first = '';
         toWrite += '<div class="episodeSpacer"><div class="vidImgContainer' + first + '" onclick="clickEpisode(this)"><video name="' + epNames[i] + '" poster="' + ep.thumbnail + '" controls><source src="">I think your browser might be too old to handle this...</video><img src="' + ep.thumbnail + '" alt="E' + String(i+1) + '"></div><div class="blankEp"></div></div>';
     }
     parent.innerHTML = toWrite;
-
-    let theSelected = document.getElementsByClassName('selected')[0].firstChild;
-    theSelected.src = CurrentSeason[theSelected.getAttribute("name")].videoSrc;
+    
+    clickEpisode(document.getElementById('videoSlider').firstChild.firstChild);
 }
 
 loadPage(Chosen2);
