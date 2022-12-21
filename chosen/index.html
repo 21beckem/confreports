@@ -176,7 +176,7 @@ function clickEpisode(el) {
     }
     el.classList.add('selected');
     let theSelected = el.firstChild;
-    theSelected.src = 'http://drive.google.com/uc?confirm=t&id=' + CurrentSeason[theSelected.getAttribute("name")].driveId;
+    theSelected.src = 'https://drive.google.com/uc?confirm=t&id=' + CurrentSeason[theSelected.getAttribute("name")].driveId;
 }
 
 function loadPage(season) {
