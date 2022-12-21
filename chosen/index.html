@@ -83,11 +83,11 @@ html, body {
     display: none;
     width: 100%;
 }
-.vidImgContainer video {
+.vidImgContainer .video {
     display: none;
     width: 100%;
 }
-.selected video {
+.selected .video {
     display: block;
     height: 100%;
     width: auto;
@@ -111,7 +111,7 @@ html, body {
 <div id="videoSlider">
     <!--<div class="episodeSpacer">
         <div class="vidImgContainer selected" onclick="clickEpisode(this)">
-            <video poster="https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg" controls>
+            <video class="video" poster="https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg" controls>
                 <source src="https://dashboard.blomp.com/preview/sharedstorage/298967_S2,_E1%20Thunder.mp4">
                 I think your browser might be too old to handle this...
             </video>
@@ -165,6 +165,8 @@ const Chosen2 = {
     }
 };
 
+const missionaryPhoneMode = false;
+
 let CurrentSeason = null;
 function clickEpisode(el) {
     var nodes = document.getElementById('videoSlider').childNodes;
@@ -176,7 +178,9 @@ function clickEpisode(el) {
     }
     el.classList.add('selected');
     let theSelected = el.firstChild;
-    theSelected.src = 'https://drive.google.com/uc?confirm=t&id=' + CurrentSeason[theSelected.getAttribute("name")].driveId;
+    if (missionaryPhoneMode) {
+        theSelected.src = 'https://drive.google.com/uc?confirm=t&id=' + CurrentSeason[theSelected.getAttribute("name")].driveId;
+    }
 }
 
 function loadPage(season) {
@@ -188,7 +192,8 @@ function loadPage(season) {
         const ep = CurrentSeason[epNames[i]];
         //let first = (i==0) ? ' selected' : '';
         let first = '';
-        toWrite += '<div class="episodeSpacer"><div class="vidImgContainer' + first + '" onclick="clickEpisode(this)"><video name="' + epNames[i] + '" poster="' + ep.thumbnail + '" controls><source src="">I think your browser might be too old to handle this...</video><img src="' + ep.thumbnail + '" alt="E' + String(i+1) + '"></div><div class="blankEp"></div></div>';
+        let videoOrFrame = (missionaryPhoneMode) ? '<video class="video" name="' + epNames[i] + '" poster="' + ep.thumbnail + '" controls><source src="">I think your browser might be too old to handle this...</video>' : '<iframe class="video" src="https://drive.google.com/file/d/' + ep.driveId + '/preview"></iframe>';
+        toWrite += '<div class="episodeSpacer"><div class="vidImgContainer' + first + '" onclick="clickEpisode(this)">' + videoOrFrame + '<img src="' + ep.thumbnail + '" alt="E' + String(i+1) + '"></div><div class="blankEp"></div></div>';
     }
     parent.innerHTML = toWrite;
     
