@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+:root {
+    --white: #c4c4c4;
+    --gray: #818181;
+    --accent: #008eab;
+    --dark: rgb(6, 6, 6);
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0px;
+    overflow: hidden;
+    font-family: "Lato", sans-serif;
+    color: var(--white);
+    background-color: rgb(21, 21, 21);
+    box-sizing: border-box;
+}
+#coverFade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0);
+    transition: all 0.5s ease;
+}
+#coverFade.active {
+    pointer-events: all;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+.sidenav.active {
+    width: 250px;
+}
+
+.sidenav button, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+.dropdown-btn.active {
+    background-color: var(--accent);
+    color: white;
+}
+.sidenav a:hover, .dropdown-btn:hover {
+    color: #f1f1f1;
+}
+.sidenav .closebtn {
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    width: auto;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: var(--white);
+}
+.dropdown-container {
+    display: none;
+    background-color: #262626;
+    padding-left: 8px;
+}
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+/* End of side pannel stuff */
+
+/* Start main window */
+.header {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: var(--dark);
+}
+.epBtn {
+    font-size:30px;
+    cursor:pointer;
+    font-size: 20px;
+    padding: 10px;
+    color: white;
+    width: fit-content;
+    background-color: #008eab;
+}
+.mlogo {
+    position: absolute;
+    margin-top: 10px;
+    right: 10px;
+    height: 100px;
+    z-index: 50;
+}
+.titleBox {
+    position: relative;
+    width: calc(100% - 50px);
+    padding: 0;
+    margin-top: 0.5%;
+    margin-left: 50px;
+}
+.titleBox #epTitle {
+    font-size: 40px;
+}
+.descriptionHolder {
+    margin-top: 1%;
+    width: calc(100% - 60px);
+    padding: 5px 30px 5px 30px;
+}
+#descriptionBox {
+    height: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 10px var(--dark);
+    color: var(--gray);
+}
+#infoBox {
+    margin-top: 2%;
+    padding: 0;
+}
+#epNum {
+    color: var(--gray);
+    margin-left: 60px;
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: 750;
+}
+.mainPlayerBox {
+    margin-top: 2%;
+    height: 60%;
+    width: 100%;
+}
+#videoEl {
+    width: 100%;
+    height: 100%;
+}
+</style>
+</head>
+<body>
+<div onclick="toggleNav()" id="coverFade"></div>
+
+<div id="mySidenav" class="sidenav">
+    <button class="closebtn" onclick="toggleNav()">×</button>
+    <button class="dropdown-btn" onclick="sidenavDropdown(this)">Season 2 
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <button onclick="selEp(2, this)">Thunder</button>
+        <button onclick="selEp(2, this)">I Saw You</button>
+        <button onclick="selEp(2, this)">Matthew 4:24</button>
+        <button onclick="selEp(2, this)">The Perfect Opportunity</button>
+        <button onclick="selEp(2, this)">Spirit</button>
+        <button onclick="selEp(2, this)">Unlawful</button>
+        <button onclick="selEp(2, this)">Reckoning</button>
+        <button onclick="selEp(2, this)">Beyond Mountains</button>
+    </div>
+</div>
+
+<div class="header">
+    <div class="epBtn">
+        <span onclick="toggleNav()">☰ Episodes</span>
+    </div>
+</div>
+<img class="mlogo" src="https://confreports.org/ssmLogo.png" alt="SSM Logo">
+
+<div class="mainPlayerBox">
+    <video id="videoEl" controls src=""></video>
+</div>
+
+<div id="infoBox">
+    <div id="epNum"></div>
+    <div class="titleBox">
+        <a id="epTitle"></a>
+    </div>
+    <div class="descriptionHolder">
+        <div id="descriptionBox">
+            
+        </div>
+    </div>
+</div>
+
+<script>
+const Chosen2 = {
+    "Thunder" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg",
+        "driveId" : "1QhwZXKeq3iheFvS_YFeFN1DJhoziXVWA",
+        "epNum" : 1,
+        "desc" : "Tension builds among the disciples as they wrestle with the increasing fame of Jesus in Samaria. Jesus rebukes Big James and John for their prejudice and, after a near-violent encounter, gives them a new nickname."
+    },
+    "I Saw You" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_2.jpeg",
+        "driveId" : "1GEMc_ykx59LndBuFCFnaxOsGFP1BQeqC",
+        "epNum" : 2,
+        "desc" : "A mysterious visitor seeks to meet Jesus, but the disciples are hesitant. Tension builds between Simon and Matthew. As the group heads to a new city, word arrives that Jesus' fame is growing."
+    },
+    "Matthew 4:24" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_3.jpeg",
+        "driveId" : "1Z43Slk_rAcwtpNw8O72vT8dNtGPoBoL0",
+        "epNum" : 3,
+        "desc" : "A long, exhausting day turns into night as the disciples help Jesus deal with a large crowd hoping to be healed. Around the campfire, over dinner, the group tried to get to know each other better. But tensions erupt."
+    },
+    "The Perfect Opportunity" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_4.jpeg",
+        "driveId" : "1sPavM0A6kEoXSx071hWIK47Ma4EVZmDB",
+        "epNum" : 4,
+        "desc" : "As Jesus and the disciples head to Jerusalem to celebrate the Feast of Tabernacles, a new enemy follows them, while a familiar enemy awaits."
+    },
+    "Spirit" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_5.jpeg",
+        "driveId" : "1alt40sK72yAXkh8V-Z1LYLh-HNfSkA_P",
+        "epNum" : 5,
+        "desc" : "After stirring the water, Jesus is now pursued by Simon the Zealot, Atticus, and Shmuel. John the Baptizer visits the group and tells Jesus his dangerous mission. Meanwhile, back at the camp, Mary Magdalene is devastated by an encounter with a mysterious and dangerous stranger."
+    },
+    "Unlawful" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_6.jpeg",
+        "driveId" : "1aML6gD3kYBJDNucTNPTjxJx1-1IugHGy",
+        "epNum" : 6,
+        "desc" : "Matthew and Simon try to get along as they search for Mary in dark places. The group fears for Mary as they struggle with lack of food and bad news about John the Baptist. Meanwhile, Jesus continues to upset Pharisees across multiple regions."
+    },
+    "Reckoning" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_7.jpeg",
+        "driveId" : "1ug-A27aC6p3FEqusNN8qSKAekoRqYZV4",
+        "epNum" : 7,
+        "desc" : "After learning of Jesus' whereabouts, Quintus sends Gaius to arrest him. The disciples lose control as they argue about how to respond. While seeking information about where Jesus has been taken, Andrew and Philip encounter old friends."
+    },
+    "Beyond Mountains" : {
+        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_8.jpeg",
+        "driveId" : "12VG3La4sG8fZONenKyMYBF1Ze5JVnyIL",
+
+        "epNum" : 8,
+        "desc" : "While Jesus and Matthew prepare the content of the big sermon, the disciples spread the word while fighting amongst themselves. A high-ranking Sanhedrin member is shocked by Shmuel's reports on Jesus. Thousands arrive for the sermon, including familiar faces."
+    }
+};
+const Chosen3 = undefined;
+let Ep = undefined;
+
+function _(x) { return document.getElementById(x); }
+
+function selEp(sN, el) {
+    _("mySidenav").classList.remove('active');
+    _("coverFade").classList.remove('active');
+    if (sN==2) {
+        Ep = Chosen2[el.innerText];
+    } else {
+        Ep = Chosen3[el.innerText];
+    }
+    //alert(Ep.desc);
+    
+    _('videoEl').src = "https://drive.google.com/uc?confirm=t&id=" + Ep.driveId;
+    _('videoEl').poster = Ep.thumbnail;
+    _('epNum').innerHTML = "Season " + sN + " Episode " + Ep.epNum;
+    _('epTitle').innerHTML = el.innerText;
+    _('descriptionBox').innerHTML = Ep.desc;
+}
+
+
+function toggleNav() {
+    _("mySidenav").classList.toggle('active');
+    _("coverFade").classList.toggle('active');
+}
+
+function sidenavDropdown(e) {
+    e.classList.toggle("active");
+    var dropdownContent = e.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+    } else {
+        dropdownContent.style.display = "block";
+    }
+}
+toggleNav();
+</script>
+   
+</body>
+</html> 
