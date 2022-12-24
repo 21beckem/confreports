@@ -170,6 +170,7 @@ html, body {
 
 <div id="mySidenav" class="sidenav">
     <button class="closebtn" onclick="toggleNav()">×</button>
+    <button onclick="selEp(0, this)">The Christ Child</button>
     <button class="dropdown-btn" onclick="sidenavDropdown(this)">Season 2 
         <i class="fa fa-caret-down"></i>
     </button>
@@ -209,6 +210,14 @@ html, body {
 </div>
 
 <script>
+const bonusVids = {
+    "The Christ Child" : {
+        "thumbnail" : "",
+        "epNum" : 1,
+        "driveId" : "https://media2.ldscdn.org/assets/missionary/christmas-2019/2019-09-0050-the-christ-child-a-nativity-story-lighttheworld-720p-eng.mp4",
+        "desc" : "Christ's Birth"
+    }
+}
 const Chosen2 = {
     "Thunder" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg",
@@ -268,14 +277,19 @@ function _(x) { return document.getElementById(x); }
 function selEp(sN, el) {
     _("mySidenav").classList.remove('active');
     _("coverFade").classList.remove('active');
-    if (sN==2) {
+    if (sN==0) {
+        Ep = bonusVids[el.innerText];
+    }
+    else if (sN==2) {
         Ep = Chosen2[el.innerText];
     } else {
         Ep = Chosen3[el.innerText];
     }
     //alert(Ep.desc);
     
-    _('videoEl').src = "https://drive.google.com/uc?confirm=t&id=" + Ep.driveId;
+    const preUrl = (sN==0) ? "" : "https://drive.google.com/uc?confirm=t&id=";
+    
+    _('videoEl').src = preUrl + Ep.driveId;
     _('videoEl').poster = Ep.thumbnail;
     _('epNum').innerHTML = "Season " + sN + " Episode " + Ep.epNum;
     _('epTitle').innerHTML = el.innerText;
