@@ -28,7 +28,15 @@ function write(page) {
 }
 
 function createHeader(option) {
-    var toWrite = '';
+    var toWrite = `<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PWK62CKZSE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PWK62CKZSE');
+</script>`;
     if (option.includes("search")) {
         toWrite += '<canvas id="scrollHelper"></canvas>';
     }
