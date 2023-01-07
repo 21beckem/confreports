@@ -221,7 +221,7 @@ const bonusVids = {
 const Chosen2 = {
     "Thunder" : {
         "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg",
-        "driveId" : "https://doc-0k-1s-docs.googleusercontent.com/docs/securesc/99v1mdp36ofje80fg08ivc6fjtkj7nq2/88uet8orsreg33crct948cdcchmdnpa9/1673118450000/14450790082341232309/16527493708773418060/1QhwZXKeq3iheFvS_YFeFN1DJhoziXVWA?ax=ALjR8symVzzu7xIzB3eYiFg2XmZ9qTNoktRmIaWePKWcCUN1JkmWgiGaFeYCs0kkkPLLTl63iNEufi6KCMuswTXoIDN4S489iAUObECzEbulgIZO_sQxfx4Wv6lo559efJ9ZC8K2-YeSKdb8Al_ukn-LWuWU27D0kIErAixsTZ0XKz5ElC3pkJKNls96SV_Kwr0K2a4O4wrZy0S4UkW2sb8UNnjVO2pPRtdB8p8vXuCFUc9Hng_UL6syyKixMUHsTgjFVyRYoobYaM_TPFpsThjoAcOEzeM9sfx94cUMO34kkLO-YxJ4c-H9Ga0YtPLi-vQY7oSqLNPf73Qu0ZVzrSp4eBoNgFjU2uaelKqs2UniQm5kTjZ3rV2N8ELImaVuWrop0_MXE_RALTYeF6ON9IekrzpJ5rCyH8cJuL_y0u-bT23Lzop9KnEWlosOvWGroAWoD8yIRat3cIKD2H2ZJnI9UDtjqdvf5WTcZDlwvPU5A3SF_ZHbPwEAsVXrUrDZhwlvdXv0NRgAiMH3-t14Q4WaBRxu9WI9CPn5l0xlO_9-Zhygb-pr7iaMA8io2q9mQG3j_SFD3uSdfpNUlwtdGy2W6F0CRMlSt-OjVBpmwk6L5V4PeAdycpQRg_IHCZNY5E8boBBeZW4T_Z-UdZz2ZtOC2bdeMXVdNuq4mPEDE2GzBUkCTA7CIYIaae3IHpeStfyGV7soHGigfIZeDs1fw-IR_zG6Th2ELyxitbvN4Qv_6yDQE5Drlf8lgZX3XdkwsVDwsB3D92FfvH90eiYjhNS3VS049JeJ5UnIGCG4I1Jt1kOhi4z-lWG-7AP0o8PjjP-RHIQNQbQINyYMbJvqc-Wfy4ApuqmJyyqqoHoAd-DZoHXlPAfx3cHg6CKQQUZLVRc&uuid=7059e32b-78fe-4fd8-9346-a0855650b08d&authuser=0",
+        "driveId" : "1QhwZXKeq3iheFvS_YFeFN1DJhoziXVWA",
         "epNum" : 1,
         "desc" : "Tension builds among the disciples as they wrestle with the increasing fame of Jesus in Samaria. Jesus rebukes Big James and John for their prejudice and, after a near-violent encounter, gives them a new nickname."
     },
@@ -287,13 +287,21 @@ function selEp(sN, el) {
     }
     //alert(Ep.desc);
     
-    const preUrl = (sN==0) ? "" : "";//"https://drive.google.com/uc?confirm=t&id=";
-    
-    _('videoEl').src = preUrl + Ep.driveId;
     _('videoEl').poster = Ep.thumbnail;
     _('epNum').innerHTML = "Season " + sN + " Episode " + Ep.epNum;
     _('epTitle').innerHTML = el.innerText;
     _('descriptionBox').innerHTML = Ep.desc;
+    
+    if (sN==0) {
+        _('videoEl').src = Ep.driveId;
+    } else {
+        fetch("https://missioncontents.000webhostapp.com/chosen/getRealGoogleURL.php?url=" + "https://drive.google.com/uc?confirm=t&id=" + Ep.driveId)
+            .then((response) => response.text())
+            .then((text) => {
+              _('videoEl').src = text;
+            });
+    }
+    
 }
 
 
