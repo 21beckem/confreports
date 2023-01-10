@@ -154,7 +154,7 @@ html, body {
     font-size: small;
     font-weight: 750;
 }
-.mainPlayerBox {
+#mainPlayerBox {
     margin-top: 2%;
     height: 60%;
     width: 100%;
@@ -162,6 +162,7 @@ html, body {
 #videoEl {
     width: 100%;
     height: 100%;
+    border: none;
 }
 </style>
 </head>
@@ -193,7 +194,7 @@ html, body {
 </div>
 <img class="mlogo" src="https://confreports.org/ssmLogo.png" alt="SSM Logo">
 
-<div class="mainPlayerBox">
+<div id="mainPlayerBox">
     <video id="videoEl" controls src=""></video>
 </div>
 
@@ -293,13 +294,10 @@ function selEp(sN, el) {
     _('descriptionBox').innerHTML = Ep.desc;
     
     if (sN==0) {
-        _('videoEl').src = Ep.driveId;
+        _('mainPlayerBox').innerHTML = '<video id="videoEl" src="' + Ep.driveId + '"></video>';
     } else {
-        fetch("https://missioncontents.000webhostapp.com/chosen/getRealGoogleURL.php?url=" + "https://drive.google.com/uc?confirm=t&id=" + Ep.driveId)
-            .then((response) => response.text())
-            .then((text) => {
-              _('videoEl').src = text;
-            });
+        let allowFullScreen = ' allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"';
+        _('mainPlayerBox').innerHTML = '<iframe id="videoEl" src="https://drive.google.com/file/d/' + Ep.driveId + '/preview"' + allowFullScreen + '></iframe>';
     }
     
 }
