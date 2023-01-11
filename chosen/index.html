@@ -171,19 +171,31 @@ html, body {
 
 <div id="mySidenav" class="sidenav">
     <button class="closebtn" onclick="toggleNav()">×</button>
-    <button onclick="selEp(0, this)">The Christ Child</button>
+    <button onclick="selEp('bonusVids', this)">The Christ Child</button>
+    <button class="dropdown-btn" onclick="sidenavDropdown(this)">1 Nephi 
+        <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-container">
+        <button onclick="selEp('1Nephi', this)">1 Nephi 1-2</button>
+        <button onclick="selEp('1Nephi', this)">1 Nephi 3-5</button>
+        <button onclick="selEp('1Nephi', this)">1 Nephi 7</button>
+        <button onclick="selEp('1Nephi', this)">1 Nephi 8</button>
+        <button onclick="selEp('1Nephi', this)">1 Nephi 16</button>
+        <button onclick="selEp('1Nephi', this)">1 Nephi 17-18</button>
+        <button onclick="selEp('1Nephi', this)">1 Nephi 18</button>
+    </div>
     <button class="dropdown-btn" onclick="sidenavDropdown(this)">Season 2 
         <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-container">
-        <button onclick="selEp(2, this)">Thunder</button>
-        <button onclick="selEp(2, this)">I Saw You</button>
-        <button onclick="selEp(2, this)">Matthew 4:24</button>
-        <button onclick="selEp(2, this)">The Perfect Opportunity</button>
-        <button onclick="selEp(2, this)">Spirit</button>
-        <button onclick="selEp(2, this)">Unlawful</button>
-        <button onclick="selEp(2, this)">Reckoning</button>
-        <button onclick="selEp(2, this)">Beyond Mountains</button>
+        <button onclick="selEp('Chosen2', this)">Thunder</button>
+        <button onclick="selEp('Chosen2', this)">I Saw You</button>
+        <button onclick="selEp('Chosen2', this)">Matthew 4:24</button>
+        <button onclick="selEp('Chosen2', this)">The Perfect Opportunity</button>
+        <button onclick="selEp('Chosen2', this)">Spirit</button>
+        <button onclick="selEp('Chosen2', this)">Unlawful</button>
+        <button onclick="selEp('Chosen2', this)">Reckoning</button>
+        <button onclick="selEp('Chosen2', this)">Beyond Mountains</button>
     </div>
 </div>
 
@@ -211,65 +223,67 @@ html, body {
 </div>
 
 <script>
-const bonusVids = {
-    "The Christ Child" : {
-        "thumbnail" : "",
-        "epNum" : 1,
-        "driveId" : "https://media2.ldscdn.org/assets/missionary/christmas-2019/2019-09-0050-the-christ-child-a-nativity-story-lighttheworld-720p-eng.mp4",
-        "desc" : "Christ's Birth"
+const Videos = {
+    "bonusVids" : {
+        "The Christ Child" : {
+            "thumbnail" : "",
+            "epNum" : 1,
+            "driveId" : "https://media2.ldscdn.org/assets/missionary/christmas-2019/2019-09-0050-the-christ-child-a-nativity-story-lighttheworld-720p-eng.mp4",
+            "desc" : "Christ's Birth"
+        }
+    },
+    "Chosen2" : {
+        "Thunder" : {
+            "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg",
+            "driveId" : "1QhwZXKeq3iheFvS_YFeFN1DJhoziXVWA",
+            "epNum" : 1,
+            "desc" : "Tension builds among the disciples as they wrestle with the increasing fame of Jesus in Samaria. Jesus rebukes Big James and John for their prejudice and, after a near-violent encounter, gives them a new nickname."
+        },
+        "I Saw You" : {
+            "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_2.jpeg",
+            "driveId" : "1GEMc_ykx59LndBuFCFnaxOsGFP1BQeqC",
+            "epNum" : 2,
+            "desc" : "A mysterious visitor seeks to meet Jesus, but the disciples are hesitant. Tension builds between Simon and Matthew. As the group heads to a new city, word arrives that Jesus' fame is growing."
+        },
+        "Matthew 4:24" : {
+            "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_3.jpeg",
+            "driveId" : "1Z43Slk_rAcwtpNw8O72vT8dNtGPoBoL0",
+            "epNum" : 3,
+            "desc" : "A long, exhausting day turns into night as the disciples help Jesus deal with a large crowd hoping to be healed. Around the campfire, over dinner, the group tried to get to know each other better. But tensions erupt."
+        },
+        "The Perfect Opportunity" : {
+            "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_4.jpeg",
+            "driveId" : "1sPavM0A6kEoXSx071hWIK47Ma4EVZmDB",
+            "epNum" : 4,
+            "desc" : "As Jesus and the disciples head to Jerusalem to celebrate the Feast of Tabernacles, a new enemy follows them, while a familiar enemy awaits."
+        },
+        "Spirit" : {
+            "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_5.jpeg",
+            "driveId" : "1alt40sK72yAXkh8V-Z1LYLh-HNfSkA_P",
+            "epNum" : 5,
+            "desc" : "After stirring the water, Jesus is now pursued by Simon the Zealot, Atticus, and Shmuel. John the Baptizer visits the group and tells Jesus his dangerous mission. Meanwhile, back at the camp, Mary Magdalene is devastated by an encounter with a mysterious and dangerous stranger."
+        },
+        "Unlawful" : {
+            "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_6.jpeg",
+            "driveId" : "1aML6gD3kYBJDNucTNPTjxJx1-1IugHGy",
+            "epNum" : 6,
+            "desc" : "Matthew and Simon try to get along as they search for Mary in dark places. The group fears for Mary as they struggle with lack of food and bad news about John the Baptist. Meanwhile, Jesus continues to upset Pharisees across multiple regions."
+        },
+        "Reckoning" : {
+            "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_7.jpeg",
+            "driveId" : "1ug-A27aC6p3FEqusNN8qSKAekoRqYZV4",
+            "epNum" : 7,
+            "desc" : "After learning of Jesus' whereabouts, Quintus sends Gaius to arrest him. The disciples lose control as they argue about how to respond. While seeking information about where Jesus has been taken, Andrew and Philip encounter old friends."
+        },
+        "Beyond Mountains" : {
+            "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_8.jpeg",
+            "driveId" : "12VG3La4sG8fZONenKyMYBF1Ze5JVnyIL",
+
+            "epNum" : 8,
+            "desc" : "While Jesus and Matthew prepare the content of the big sermon, the disciples spread the word while fighting amongst themselves. A high-ranking Sanhedrin member is shocked by Shmuel's reports on Jesus. Thousands arrive for the sermon, including familiar faces."
+        }
     }
 }
-const Chosen2 = {
-    "Thunder" : {
-        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_1.jpeg",
-        "driveId" : "1QhwZXKeq3iheFvS_YFeFN1DJhoziXVWA",
-        "epNum" : 1,
-        "desc" : "Tension builds among the disciples as they wrestle with the increasing fame of Jesus in Samaria. Jesus rebukes Big James and John for their prejudice and, after a near-violent encounter, gives them a new nickname."
-    },
-    "I Saw You" : {
-        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_2.jpeg",
-        "driveId" : "1GEMc_ykx59LndBuFCFnaxOsGFP1BQeqC",
-        "epNum" : 2,
-        "desc" : "A mysterious visitor seeks to meet Jesus, but the disciples are hesitant. Tension builds between Simon and Matthew. As the group heads to a new city, word arrives that Jesus' fame is growing."
-    },
-    "Matthew 4:24" : {
-        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_3.jpeg",
-        "driveId" : "1Z43Slk_rAcwtpNw8O72vT8dNtGPoBoL0",
-        "epNum" : 3,
-        "desc" : "A long, exhausting day turns into night as the disciples help Jesus deal with a large crowd hoping to be healed. Around the campfire, over dinner, the group tried to get to know each other better. But tensions erupt."
-    },
-    "The Perfect Opportunity" : {
-        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_4.jpeg",
-        "driveId" : "1sPavM0A6kEoXSx071hWIK47Ma4EVZmDB",
-        "epNum" : 4,
-        "desc" : "As Jesus and the disciples head to Jerusalem to celebrate the Feast of Tabernacles, a new enemy follows them, while a familiar enemy awaits."
-    },
-    "Spirit" : {
-        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_5.jpeg",
-        "driveId" : "1alt40sK72yAXkh8V-Z1LYLh-HNfSkA_P",
-        "epNum" : 5,
-        "desc" : "After stirring the water, Jesus is now pursued by Simon the Zealot, Atticus, and Shmuel. John the Baptizer visits the group and tells Jesus his dangerous mission. Meanwhile, back at the camp, Mary Magdalene is devastated by an encounter with a mysterious and dangerous stranger."
-    },
-    "Unlawful" : {
-        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_6.jpeg",
-        "driveId" : "1aML6gD3kYBJDNucTNPTjxJx1-1IugHGy",
-        "epNum" : 6,
-        "desc" : "Matthew and Simon try to get along as they search for Mary in dark places. The group fears for Mary as they struggle with lack of food and bad news about John the Baptist. Meanwhile, Jesus continues to upset Pharisees across multiple regions."
-    },
-    "Reckoning" : {
-        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_7.jpeg",
-        "driveId" : "1ug-A27aC6p3FEqusNN8qSKAekoRqYZV4",
-        "epNum" : 7,
-        "desc" : "After learning of Jesus' whereabouts, Quintus sends Gaius to arrest him. The disciples lose control as they argue about how to respond. While seeking information about where Jesus has been taken, Andrew and Philip encounter old friends."
-    },
-    "Beyond Mountains" : {
-        "thumbnail" : "https://images.angelstudios.com/image/upload/f_auto,c_limit,w_3840,q_auto/c_fill,q_auto,ar_16:9,g_north/v1633208700/angel-app/the-chosen/videos/season_2/episode_8.jpeg",
-        "driveId" : "12VG3La4sG8fZONenKyMYBF1Ze5JVnyIL",
-
-        "epNum" : 8,
-        "desc" : "While Jesus and Matthew prepare the content of the big sermon, the disciples spread the word while fighting amongst themselves. A high-ranking Sanhedrin member is shocked by Shmuel's reports on Jesus. Thousands arrive for the sermon, including familiar faces."
-    }
-};
 const Chosen3 = undefined;
 let Ep = undefined;
 
@@ -278,14 +292,7 @@ function _(x) { return document.getElementById(x); }
 function selEp(sN, el) {
     _("mySidenav").classList.remove('active');
     _("coverFade").classList.remove('active');
-    if (sN==0) {
-        Ep = bonusVids[el.innerText];
-    }
-    else if (sN==2) {
-        Ep = Chosen2[el.innerText];
-    } else {
-        Ep = Chosen3[el.innerText];
-    }
+    Ep = Videos[sN][el.innerText];
     //alert(Ep.desc);
     
     _('videoEl').poster = Ep.thumbnail;
@@ -293,7 +300,7 @@ function selEp(sN, el) {
     _('epTitle').innerHTML = el.innerText;
     _('descriptionBox').innerHTML = Ep.desc;
     
-    if (sN==0) {
+    if (!sN.toLowerCase().includes('chosen')) {
         _('mainPlayerBox').innerHTML = '<video id="videoEl" src="' + Ep.driveId + '"></video>';
     } else {
         let allowFullScreen = ' allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"';
