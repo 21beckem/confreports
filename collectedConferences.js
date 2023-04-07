@@ -29,7 +29,7 @@ function confThumbnail(confObj) {
 
 const AllConfs = {
     'April 2023' : {
-        'link' : '/2023april',
+        'link' : '/2023april/',
         'thumbnail' : 'thumbnail.jpg'
     },
     'October 2022' : {
