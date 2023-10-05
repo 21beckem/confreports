@@ -28,6 +28,10 @@ function confThumbnail(confObj) {
 }
 
 const AllConfs = {
+    'October 2023' : {
+        'link' : '/2023oct/',
+        'thumbnail' : 'thumbnail.webp'
+    },
     'April 2023' : {
         'link' : '/2023april/',
         'thumbnail' : 'thumbnail.jpg'
