@@ -2,7 +2,7 @@ class confList {
     constructor() {
         // you edit only these 2 lines of code!!!!  leave the quotes on both sides of the name!
         this.firstConference = "2012april";
-        this.lastConference = "2023april";
+        this.lastConference = "2024april";
     }
     getList() {
         let firstConf = parseFloat(this.firstConference.replace('april', '.0').replace('oct', '.5'));
@@ -28,6 +28,10 @@ function confThumbnail(confObj) {
 }
 
 const AllConfs = {
+    'April 2024' : {
+        'link' : '/2024april/',
+        'thumbnail' : 'inbound611880786776200178.webp'
+    },
     'October 2023' : {
         'link' : '/2023oct/',
         'thumbnail' : 'thumbnail.webp'
